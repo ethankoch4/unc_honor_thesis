@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# custom ignores
+*data/scotus/*
+
 # C extensions
 *.so
 
