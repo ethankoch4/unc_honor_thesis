@@ -21,7 +21,7 @@ The coding and any other work for my Honor's Thesis at UNC-Chapel Hill in Statis
 #### 3.2.1 - Classify according to issueArea
 
 ### 3.3 - Node2vec on SCOTUS
-
+***HOW CAN I CONNECT THIS TO NODE2VEC??***
 #### 3.3.1 - Classify according to issueArea
 
 ### 3.4 - Compare Doc2Vec & Node2Vec on SCOTUS

@@ -1,6 +1,11 @@
 import json
 import time
+import math
+import scipy.sparse as sp
+from sklearn.metrics import pairwise_distances
+import igraph
 import warnings
+import pandas as pd
 import itertools
 warnings.filterwarnings('ignore')
 warnings.simplefilter('ignore')
@@ -10,6 +15,87 @@ from node2vec.node2vec import node2vec
 from matplotlib.offsetbox import AnchoredText
 
 import matplotlib.pyplot as plt
+
+def stratified_sample_split(class_to_id={},proportion_in_test=0.2):
+    """
+    Stratified Random Sample into train/test split on SCOTUS dataset
+
+    Parameters
+    ----------
+    dict-like object with key being class_id,
+        and the value being a list of ids corresponding to that class 
+
+    Output
+    ------
+    np.array of train_indices, np.array of test_indices
+    """
+    print('FUNCTION NOT FULLY TESTED: stratified_sample_split')
+    sampled_indices = np.array([])
+    non_sampled_indices = np.array([])
+
+    sampled_indices_dict = {0:None,1:None,2:None,3:None,4:None,5:None,
+                            6:None,7:None,8:None,9:None,10:None,
+                            11:None,12:None,13:None,14:None}
+
+    non_sampled_indices_dict = {0:None,1:None,2:None,3:None,4:None,5:None,
+                                6:None,7:None,8:None,9:None,10:None,
+                                11:None,12:None,13:None,14:None}
+
+    for i in iter(indices_dict):
+        msk = np.random.rand(len(indices_dict[i])) >= proportion_in_test
+        
+        tmp_sampled = np.array(
+            [indices_dict[i][j] for j in range(len(msk)) if msk[j]==True])
+        tmp_non_sampled = np.array(
+            [indices_dict[i][j] for j in range(len(msk)) if msk[j]==False])
+        
+        sampled_indices = np.append(sampled_indices, tmp_sampled)
+        non_sampled_indices = np.append(non_sampled_indices, tmp_non_sampled)
+
+        sampled_indices_dict[i] = sampled_indices
+        non_sampled_indices_dict[i] = non_sampled_indices
+            
+    sampled_indices = np.array(np.sort(sampled_indices,axis=None),dtype=int)
+    non_sampled_indices = np.array(np.sort(non_sampled_indices,axis=None),dtype=int)
+    print("Total length of training indices: "+str(len(sampled_indices))+"\n"+str(sampled_indices)+"\n")
+    print("Total length of test indices: "+str(len(non_sampled_indices))+"\n"+str(non_sampled_indices))
+    return sampled_indices, non_sampled_indices
+
+def load_scotus_network(file_path="../data/scotus/scotus_netowrk.graphml"):
+    """
+    load the igraph network for the scotus dataset
+
+    Parameters
+    ----------
+    file_path: location of .graphml
+
+    Output
+    ------
+    igraph object, dict like : {id : issueArea}
+    """
+    print('FUNCTION NOT FULLY TESTED: load_scotus_network')
+    G = igraph.read(file_path)
+    issueAreas = {G.vs['id'][i] : int(G.vs['issueArea'][i]) for i in range(len(G.vs['id']))}
+    return G, issueAreas
+
+def load_scotus_tf_idf(file_path="../data/scotus/tfidf_matrix.npz"):
+    """
+    load the sparse tf-idf matrix for the scotus dataset
+
+    Parameters
+    ----------
+    file_path: location of .npz
+
+    Output
+    ------
+    scipy sparse csr_matrix
+    """
+    tf_idf = np.load(file_path)
+    data = tf_idf.f.data
+    indices = tf_idf.f.indices
+    indptr = tf_idf.f.indptr
+    data_shape = tuple(tf_idf.f.shape)
+    return sp.csr_matrix((data, indices, indptr),shape=data_shape)
 
 def score_bhamidi(memberships, predicted_memberships):
     """
