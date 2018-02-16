@@ -1,20 +1,37 @@
-import json
-import time
-import math
-import scipy.sparse as sp
-from sklearn.metrics import pairwise_distances
-import igraph
+import sys
 import warnings
-import pandas as pd
-import itertools
 warnings.filterwarnings('ignore')
 warnings.simplefilter('ignore')
-import numpy as np
-from sbm.sbm import stochastic_block_model
-from node2vec.node2vec import node2vec
-from matplotlib.offsetbox import AnchoredText
 
-import matplotlib.pyplot as plt
+def get_list_of_docs(dir_path='../data/scotus/textfiles/*.txt'):
+    """
+    get list of documents as strings from directory
+
+    Parameters
+    ----------
+    path to directory of .txt files
+
+    Output
+    ------
+    list of docs, list of names
+    """
+    if 'glob' not in sys.modules:
+        import glob
+    # try to accept different variations/understings of dir_path
+    if dir_path[-1]!='/' and dir_path[-4:]!='.txt':
+        dir_path = dir_path + '/*.txt'
+    elif dir_path[-4:]!='.txt':
+        dir_path = dir_path + '*.txt'
+
+    files = glob.glob(dir_path)
+    documents = []
+    names = []
+
+    for filename in files:
+        with open(filename, 'r', encoding="utf8") as readfile:
+            names.append(os.path.basename(filename)[:-4])
+            documents.append(readfile.read())
+    return documents, names
 
 def stratified_sample_split(class_to_id={},proportion_in_test=0.2):
     """
@@ -29,25 +46,23 @@ def stratified_sample_split(class_to_id={},proportion_in_test=0.2):
     ------
     np.array of train_indices, np.array of test_indices
     """
+    if 'numpy' not in sys.modules:
+        import numpy as np
     print('FUNCTION NOT FULLY TESTED: stratified_sample_split')
     sampled_indices = np.array([])
     non_sampled_indices = np.array([])
 
-    sampled_indices_dict = {0:None,1:None,2:None,3:None,4:None,5:None,
-                            6:None,7:None,8:None,9:None,10:None,
-                            11:None,12:None,13:None,14:None}
+    sampled_indices_dict = {i:None for i in range(len(class_to_id.keys()))}
 
-    non_sampled_indices_dict = {0:None,1:None,2:None,3:None,4:None,5:None,
-                                6:None,7:None,8:None,9:None,10:None,
-                                11:None,12:None,13:None,14:None}
+    non_sampled_indices_dict = {i:None for i in range(len(class_to_id.keys()))}
 
-    for i in iter(indices_dict):
-        msk = np.random.rand(len(indices_dict[i])) >= proportion_in_test
+    for i in iter(class_to_id):
+        msk = np.random.rand(len(class_to_id[i])) >= proportion_in_test
         
         tmp_sampled = np.array(
-            [indices_dict[i][j] for j in range(len(msk)) if msk[j]==True])
+            [class_to_id[i][j] for j in range(len(msk)) if msk[j]==True])
         tmp_non_sampled = np.array(
-            [indices_dict[i][j] for j in range(len(msk)) if msk[j]==False])
+            [class_to_id[i][j] for j in range(len(msk)) if msk[j]==False])
         
         sampled_indices = np.append(sampled_indices, tmp_sampled)
         non_sampled_indices = np.append(non_sampled_indices, tmp_non_sampled)
@@ -73,6 +88,8 @@ def load_scotus_network(file_path="../data/scotus/scotus_netowrk.graphml"):
     ------
     igraph object, dict like : {id : issueArea}
     """
+    if 'igraph' not in sys.modules:
+        import igraph
     print('FUNCTION NOT FULLY TESTED: load_scotus_network')
     G = igraph.read(file_path)
     issueAreas = {G.vs['id'][i] : int(G.vs['issueArea'][i]) for i in range(len(G.vs['id']))}
@@ -90,6 +107,10 @@ def load_scotus_tf_idf(file_path="../data/scotus/tfidf_matrix.npz"):
     ------
     scipy sparse csr_matrix
     """
+    if 'scipy.sparse' not in sys.modules:
+        import scipy.sparse as sp
+    if 'numpy' not in sys.modules:
+        import numpy as np
     tf_idf = np.load(file_path)
     data = tf_idf.f.data
     indices = tf_idf.f.indices
@@ -180,6 +201,8 @@ def score_agreement(y, y_hat):
     output variable
     score - agreement score
     '''
+    if 'numpy' not in sys.modules:
+        import numpy as np
     max_score = 0
     relabelings = create_relabelings(y_hat)
     y = np.array(y)
@@ -191,6 +214,8 @@ def score_auc(x,y):
     x - vector of x values
     y - vector of y values
     '''
+    if 'numpy' not in sys.modules:
+        import numpy as np
     return np.trapz(y,x=x)
 
 def create_relabelings(y):
@@ -203,6 +228,10 @@ def create_relabelings(y):
     output variable
     relabeling - possible relabelings of y
     '''
+    if 'itertools' not in sys.modules:
+        import itertools
+    if 'numpy' not in sys.modules:
+        import numpy as np
     lookups = list(set(itertools.permutations(set(y))))
     relabelings = []
     for lookup in lookups:
@@ -211,6 +240,8 @@ def create_relabelings(y):
     return relabelings
 
 def make_block_probs(in_class_prob=0.5, out_class_prob=0.5):
+    if 'numpy' not in sys.modules:
+        import numpy as np
     return np.array([[in_class_prob, out_class_prob],
                      [out_class_prob, in_class_prob]])
 
@@ -226,6 +257,10 @@ def multiple_sbm_iterate(start = 30,
                         p = 1.0,
                         q = 1.0,
                         samples = 10):
+    if 'numpy' not in sys.modules:
+        import numpy as np
+    if 'time' not in sys.modules:
+        import time
     print('At multiple_sbm_iterate(...)')
     start_time = time.clock()
     # will be y-axis on plot
@@ -291,6 +326,12 @@ def eval_multiple_walks(sbm, w_length=50, n_classes=2, num_walks=25, p=1, q=1, i
     iterations : number of times the node2vec walks should be regenerated, understanding that the node embeddings must
                     be recalculated every time the walks are regenerated
     '''
+    if 'numpy' not in sys.modules:
+        import numpy as np
+    if 'time' not in sys.modules:
+        import time
+    if 'node2vec' not in sys.modules:
+        from node2vec.node2vec import node2vec
     print('At eval_multiple_walks(...)')
     start_time = time.clock()
     bhamidi_scores = []
@@ -331,6 +372,12 @@ def iterate_out_of_class_probs(start = 30,
                                iterations = 10,
                                p = 1.0,
                                q = 1.0):
+    if 'numpy' not in sys.modules:
+        import numpy as np
+    if 'time' not in sys.modules:
+        import time
+    if 'sbm' not in sys.modules:
+        from sbm.sbm import stochastic_block_model
     print('At iterate_out_of_class_probs(...)')
     start_time = time.clock()
     # will be y-axis on plot
@@ -392,6 +439,8 @@ def save_current_status(file_name = 'current_status_resample_walks',
                         iterations = 'N/a',
                         p = 'N/a',
                         q = 'N/a'):
+    if 'json' not in sys.modules:
+        import json
     # saving current status
     current_status = {
                     'iterations' : iterations,
@@ -431,6 +480,9 @@ def plot_save_scores(out_class_probs=[],
                      iterations = 'N/a',
                      p = 'N/a',
                      q = 'N/a'):
+    if 'matplotlib' not in sys.modules:
+        from matplotlib.offsetbox import AnchoredText
+        import matplotlib.pyplot as plt
     plt.style.use('ggplot')
     # first plot : plot scores
     fig, ax = plt.subplots(figsize=(12, 8))

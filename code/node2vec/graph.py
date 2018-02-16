@@ -3,7 +3,7 @@ import networkx as nx
 import random
 
 
-class Node2VecGraph():
+class Node2VecGraph(object):
 	def __init__(self, nx_G, is_directed, p, q):
 		self.G = nx_G
 		self.is_directed = is_directed
