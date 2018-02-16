@@ -26,4 +26,4 @@ The coding and any other work for my Honor's Thesis at UNC-Chapel Hill in Statis
 
 ### 3.4 - Compare Doc2Vec & Node2Vec on SCOTUS
 
-### 4 - Implications and Future Questions
+## 4 - Implications and Future Questions
