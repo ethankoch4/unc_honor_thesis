@@ -5,6 +5,7 @@ __pycache__/
 
 # custom ignores
 *data/scotus/*
+*plots/similarity_plots/
 
 # C extensions
 *.so

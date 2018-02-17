@@ -7,23 +7,25 @@ The coding and any other work for my Honor's Thesis at UNC-Chapel Hill in Statis
 ## Introduction & Goals
 
 ## 1 - SBM Theory
-
+***HOW CAN I CONNECT THIS TO Node2Vec??***
 ## 2 - Word2Vec, Node2Vec, Doc2Vec Theory
 
 ## 3 - On Real World Data
 
-### 3.1 - Word2Vec on SCOTUS
+### 3.1 - Word2Vec on SCOTUS vs. GoogleNews vectors
 
-#### 3.1.1 - Compare with GoogleNewss or Wikipedia vectors
+### 3.2 - Doc2Vec vs. Node2Vec on SCOTUS (100 clusters)
 
-### 3.2 - Doc2Vec on SCOTUS
+### 3.3 - Doc2Vec vs. Node2Vec on SCOTUS (14 clusters)
 
-#### 3.2.1 - Classify according to issueArea
+#### 3.3.1 - Compare to issueAreas - Did either extract them?
 
-### 3.3 - Node2vec on SCOTUS
-***HOW CAN I CONNECT THIS TO NODE2VEC??***
-#### 3.3.1 - Classify according to issueArea
+#### 3.3.2 - Combine the two - Did it perform better?
 
-### 3.4 - Compare Doc2Vec & Node2Vec on SCOTUS
+### 3.4 - Doc2Vec vs. Node2Vec on SCOTUS (14 classifying) vs. issueAreas
+
+#### 3.4.1 - Combine the two - Did it perform better?
+
+### 3.5 - Overall Comparison Results of Doc2Vec vs. Node2Vec on SCOTUS
 
 ## 4 - Implications and Future Questions

@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings('ignore')
+warnings.simplefilter('ignore')
 import time
 import numpy as np
 import random

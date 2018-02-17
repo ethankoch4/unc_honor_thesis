@@ -1,7 +1,37 @@
-import sys
+from matplotlib.offsetbox import AnchoredText
+from node2vec.node2vec import node2vec
+from sbm.sbm import stochastic_block_model
+import datetime
+import igraph
+import itertools
+import glob
+import json
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+import scipy.sparse as sp
+import time
 import warnings
 warnings.filterwarnings('ignore')
 warnings.simplefilter('ignore')
+
+def get_name_to_date(G):
+    """
+    get dictionary mapping from doc_name to year published
+
+    Parameters
+    ----------
+    G, the igraph object of (probably) SCOTUS dataset
+
+    Output
+    ------
+    dict with keys being name, values being date in year
+    """
+    dates = {}
+    for v in G.vs:
+        date = float(str(v["year"]).strip())//1
+        dates[v["name"]] = int(date)
+    return dates
 
 def get_list_of_docs(dir_path='../data/scotus/textfiles/*.txt'):
     """
@@ -15,8 +45,6 @@ def get_list_of_docs(dir_path='../data/scotus/textfiles/*.txt'):
     ------
     list of docs, list of names
     """
-    if 'glob' not in sys.modules:
-        import glob
     # try to accept different variations/understings of dir_path
     if dir_path[-1]!='/' and dir_path[-4:]!='.txt':
         dir_path = dir_path + '/*.txt'
@@ -46,8 +74,6 @@ def stratified_sample_split(class_to_id={},proportion_in_test=0.2):
     ------
     np.array of train_indices, np.array of test_indices
     """
-    if 'numpy' not in sys.modules:
-        import numpy as np
     print('FUNCTION NOT FULLY TESTED: stratified_sample_split')
     sampled_indices = np.array([])
     non_sampled_indices = np.array([])
@@ -76,7 +102,7 @@ def stratified_sample_split(class_to_id={},proportion_in_test=0.2):
     print("Total length of test indices: "+str(len(non_sampled_indices))+"\n"+str(non_sampled_indices))
     return sampled_indices, non_sampled_indices
 
-def load_scotus_network(file_path="../data/scotus/scotus_netowrk.graphml"):
+def load_scotus_network(file_path="../data/scotus/scotus_network.graphml"):
     """
     load the igraph network for the scotus dataset
 
@@ -88,8 +114,6 @@ def load_scotus_network(file_path="../data/scotus/scotus_netowrk.graphml"):
     ------
     igraph object, dict like : {id : issueArea}
     """
-    if 'igraph' not in sys.modules:
-        import igraph
     print('FUNCTION NOT FULLY TESTED: load_scotus_network')
     G = igraph.read(file_path)
     issueAreas = {G.vs['id'][i] : int(G.vs['issueArea'][i]) for i in range(len(G.vs['id']))}
@@ -107,10 +131,6 @@ def load_scotus_tf_idf(file_path="../data/scotus/tfidf_matrix.npz"):
     ------
     scipy sparse csr_matrix
     """
-    if 'scipy.sparse' not in sys.modules:
-        import scipy.sparse as sp
-    if 'numpy' not in sys.modules:
-        import numpy as np
     tf_idf = np.load(file_path)
     data = tf_idf.f.data
     indices = tf_idf.f.indices
@@ -201,8 +221,6 @@ def score_agreement(y, y_hat):
     output variable
     score - agreement score
     '''
-    if 'numpy' not in sys.modules:
-        import numpy as np
     max_score = 0
     relabelings = create_relabelings(y_hat)
     y = np.array(y)
@@ -214,8 +232,6 @@ def score_auc(x,y):
     x - vector of x values
     y - vector of y values
     '''
-    if 'numpy' not in sys.modules:
-        import numpy as np
     return np.trapz(y,x=x)
 
 def create_relabelings(y):
@@ -228,10 +244,6 @@ def create_relabelings(y):
     output variable
     relabeling - possible relabelings of y
     '''
-    if 'itertools' not in sys.modules:
-        import itertools
-    if 'numpy' not in sys.modules:
-        import numpy as np
     lookups = list(set(itertools.permutations(set(y))))
     relabelings = []
     for lookup in lookups:
@@ -240,8 +252,6 @@ def create_relabelings(y):
     return relabelings
 
 def make_block_probs(in_class_prob=0.5, out_class_prob=0.5):
-    if 'numpy' not in sys.modules:
-        import numpy as np
     return np.array([[in_class_prob, out_class_prob],
                      [out_class_prob, in_class_prob]])
 
@@ -257,10 +267,6 @@ def multiple_sbm_iterate(start = 30,
                         p = 1.0,
                         q = 1.0,
                         samples = 10):
-    if 'numpy' not in sys.modules:
-        import numpy as np
-    if 'time' not in sys.modules:
-        import time
     print('At multiple_sbm_iterate(...)')
     start_time = time.clock()
     # will be y-axis on plot
@@ -326,12 +332,6 @@ def eval_multiple_walks(sbm, w_length=50, n_classes=2, num_walks=25, p=1, q=1, i
     iterations : number of times the node2vec walks should be regenerated, understanding that the node embeddings must
                     be recalculated every time the walks are regenerated
     '''
-    if 'numpy' not in sys.modules:
-        import numpy as np
-    if 'time' not in sys.modules:
-        import time
-    if 'node2vec' not in sys.modules:
-        from node2vec.node2vec import node2vec
     print('At eval_multiple_walks(...)')
     start_time = time.clock()
     bhamidi_scores = []
@@ -372,12 +372,6 @@ def iterate_out_of_class_probs(start = 30,
                                iterations = 10,
                                p = 1.0,
                                q = 1.0):
-    if 'numpy' not in sys.modules:
-        import numpy as np
-    if 'time' not in sys.modules:
-        import time
-    if 'sbm' not in sys.modules:
-        from sbm.sbm import stochastic_block_model
     print('At iterate_out_of_class_probs(...)')
     start_time = time.clock()
     # will be y-axis on plot
@@ -439,8 +433,6 @@ def save_current_status(file_name = 'current_status_resample_walks',
                         iterations = 'N/a',
                         p = 'N/a',
                         q = 'N/a'):
-    if 'json' not in sys.modules:
-        import json
     # saving current status
     current_status = {
                     'iterations' : iterations,
@@ -480,9 +472,6 @@ def plot_save_scores(out_class_probs=[],
                      iterations = 'N/a',
                      p = 'N/a',
                      q = 'N/a'):
-    if 'matplotlib' not in sys.modules:
-        from matplotlib.offsetbox import AnchoredText
-        import matplotlib.pyplot as plt
     plt.style.use('ggplot')
     # first plot : plot scores
     fig, ax = plt.subplots(figsize=(12, 8))
