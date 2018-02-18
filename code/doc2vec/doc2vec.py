@@ -46,7 +46,7 @@ class doc2vec(object):
         self.path_to_save = path_to_save
         self.model = model
 
-    def run_doc2vec(self):
+    def run_doc2vec(self,evaluate=True):
         model = models.Doc2Vec(
                     dm=self.dm,
                     alpha=self.alpha,
@@ -101,9 +101,7 @@ class doc2vec(object):
             walks_data = [walks_data[i] for i in range(len(labels))]
 
             kmeans = KMeans(n_clusters=n_clusters).fit(walks_data)
-            self.bhamidi_score_kmeans = score_bhamidi(labels, list(kmeans.labels_))
-            self.purity_score_kmeans = score_purity(labels, list(kmeans.labels_))
-            self.agreement_score_kmeans = score_agreement(labels, list(kmeans.labels_))
+            
 
     def hierarchical_evaluate(self, embeddings, labels=[], n_clusters=2):
         from sklearn.cluster import AgglomerativeClustering
@@ -119,9 +117,23 @@ class doc2vec(object):
                                                     affinity='cosine',
                                                     linkage='average'
                                                     ).fit(walks_data)
+
+
+    def run_clustering(self, n_clusters=2,labels=[],evaluate=True):
+        self.kmeans = kmeans_evaluate(self.model,labels=labels,n_clusters=n_clusters)
+        self.hierarchical = hierarchical_evaluate(self.model,labels=labels,n_clusters=n_clusters)
+        if evaluate:
             self.bhamidi_score_hierarchical = score_bhamidi(labels, list(agglomerative.labels_))
             self.purity_score_hierarchical = score_purity(labels, list(agglomerative.labels_))
             self.agreement_score_hierarchical = score_agreement(labels, list(agglomerative.labels_))
+            self.bhamidi_score_kmeans = score_bhamidi(labels, list(kmeans.labels_))
+            self.purity_score_kmeans = score_purity(labels, list(kmeans.labels_))
+            self.agreement_score_kmeans = score_agreement(labels, list(kmeans.labels_))
+            self.kmeans_hierarchical_bhamidi = score_bhamidi(list(agglomerative.labels_), list(kmeans.labels_))
+            self.kmeans_hierarchical_purity = score_purity(list(agglomerative.labels_), list(kmeans.labels_))
+            self.kmeans_hierarchical_agreement = score_agreement(list(agglomerative.labels_), list(kmeans.labels_))
+
+
 
     def similarity_time_plot(self,case,name_to_year={},fig_size=(30,15),num_to_plot=27884,outname="ERROR",show=False):
         similar_cases = self.model.docvecs.most_similar(positive=[str(case)],topn=int(num_to_plot))
