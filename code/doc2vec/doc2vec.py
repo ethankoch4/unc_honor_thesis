@@ -90,6 +90,39 @@ class doc2vec(object):
                 documents.append(readfile.read())
         return names, documents
 
+    def kmeans_evaluate(self, embeddings, labels=[], n_clusters=2):
+        from sklearn.cluster import KMeans
+        from utilities import score_bhamidi
+        from utilities import score_purity
+        from utilities import score_agreement
+
+        if not labels == []:
+            walks_data = embeddings.docvecs
+            walks_data = [walks_data[i] for i in range(len(labels))]
+
+            kmeans = KMeans(n_clusters=n_clusters).fit(walks_data)
+            self.bhamidi_score_kmeans = score_bhamidi(labels, list(kmeans.labels_))
+            self.purity_score_kmeans = score_purity(labels, list(kmeans.labels_))
+            self.agreement_score_kmeans = score_agreement(labels, list(kmeans.labels_))
+
+    def hierarchical_evaluate(self, embeddings, labels=[], n_clusters=2):
+        from sklearn.cluster import AgglomerativeClustering
+        from utilities import score_bhamidi
+        from utilities import score_purity
+        from utilities import score_agreement
+
+        if not labels == []:
+            walks_data = embeddings.docvecs
+            walks_data = [walks_data[i] for i in range(len(labels))]
+
+            agglomerative = AgglomerativeClustering(n_clusters=n_clusters,
+                                                    affinity='cosine',
+                                                    linkage='average'
+                                                    ).fit(walks_data)
+            self.bhamidi_score_hierarchical = score_bhamidi(labels, list(agglomerative.labels_))
+            self.purity_score_hierarchical = score_purity(labels, list(agglomerative.labels_))
+            self.agreement_score_hierarchical = score_agreement(labels, list(agglomerative.labels_))
+
     def similarity_time_plot(self,case,name_to_year={},fig_size=(30,15),num_to_plot=27884,outname="ERROR",show=False):
         similar_cases = self.model.docvecs.most_similar(positive=[str(case)],topn=int(num_to_plot))
         # clip values to be between 0.0 and 1.0

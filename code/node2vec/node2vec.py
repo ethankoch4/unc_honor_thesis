@@ -1,4 +1,3 @@
-import time
 import warnings
 warnings.filterwarnings('ignore')
 warnings.simplefilter('ignore')
@@ -37,29 +36,16 @@ class node2vec(object):
         else:
             nx_G = self.read_graph(Adj_M)
         G = Node2VecGraph(nx_G, False, p, q)
-
-        print('At preprocess_transition_probs(...)')
-        start_time = time.clock()
         G.preprocess_transition_probs()
-        print("Time elapsed while running 'preprocess_transition_probs' function: {0}".format(round(time.clock()-start_time,8)))
 
-        print('At simulate_walks(...)')
-        start_time = time.clock()
         self.walks = G.simulate_walks(num_walks, walk_length)
-        print("Time elapsed while running 'simulate_walks' function: {0}".format(round(time.clock()-start_time,8)))
         
-        print('At simulate_walks(...)')
-        start_time = time.clock()
         self.model = self.learn_embeddings(self.walks)
-        print("Time elapsed while running 'learn_embeddings' function: {0}".format(round(time.clock()-start_time,8)))
-
+        self.Adj_M = Adj_M
         if evaluate:
-            print('At kmeans_evaluate(...)')
-            start_time = time.clock()
             self.kmeans_evaluate(self.model,
                                 labels=labels,
                                 n_clusters=n_classes)
-            print("Time elapsed while running 'kmeans_evaluate' function: {0}".format(round(time.clock()-start_time,8)))
 
     def read_graph(self, Adj_M):
         # only support undirected graphs as of now
@@ -85,6 +71,25 @@ class node2vec(object):
             walks_data = [walks_data[str(i)] for i in range(len(labels))]
 
             kmeans = KMeans(n_clusters=n_clusters).fit(walks_data)
-            self.bhamidi_score = score_bhamidi(labels, list(kmeans.labels_))
-            self.purity_score = score_purity(labels, list(kmeans.labels_))
-            self.agreement_score = score_agreement(labels, list(kmeans.labels_))
+            self.bhamidi_score_kmeans = score_bhamidi(labels, list(kmeans.labels_))
+            self.purity_score_kmeans = score_purity(labels, list(kmeans.labels_))
+            self.agreement_score_kmeans = score_agreement(labels, list(kmeans.labels_))
+
+    def hierarchical_evaluate(self, embeddings, labels=[], n_clusters=2):
+        from sklearn.cluster import AgglomerativeClustering
+        from utilities import score_bhamidi
+        from utilities import score_purity
+        from utilities import score_agreement
+
+        if not labels == []:
+            walks_data = embeddings.wv
+            walks_data = [walks_data[str(i)] for i in range(len(labels))]
+
+            agglomerative = AgglomerativeClustering(n_clusters=n_clusters,
+                                                    affinity='cosine',
+                                                    connectivity=self.Adj_M,
+                                                    linkage='average'
+                                                    ).fit(walks_data)
+            self.bhamidi_score_hierarchical = score_bhamidi(labels, list(agglomerative.labels_))
+            self.purity_score_hierarchical = score_purity(labels, list(agglomerative.labels_))
+            self.agreement_score_hierarchical = score_agreement(labels, list(agglomerative.labels_))
