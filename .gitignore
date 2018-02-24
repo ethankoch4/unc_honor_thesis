@@ -4,8 +4,8 @@ __pycache__/
 *$py.class
 
 # custom ignores
-*data/scotus/*
-*plots/similarity_plots/
+*data/local/
+*plots/local/
 
 # C extensions
 *.so
