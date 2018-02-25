@@ -27,7 +27,7 @@ class doc2vec(object):
             sample=1e-5,
             label_docs=True,
             epochs=100,
-            path_to_save='../data/scotus/scotus_model.doc2vec'
+            path_to_save='../data/scotus_model.doc2vec'
             ):
         if label_docs==True:
             self.doc_list = self.label_docs(doc_list, names)
@@ -70,7 +70,7 @@ class doc2vec(object):
         return model
 
     def label_docs(self, doc_list, names):
-        return [models.doc2vec.LabeledSentence(doc.split(),tags=[names[i]]) for i,doc in enumerate(doc_list)]
+        return [models.doc2vec.TaggedDocument(doc.split(),tags=[names[i]]) for i,doc in enumerate(doc_list)]
 
     def get_most_similar(self, doc_name, n=5, file_root='../data/scotus/textfiles/'):
         if self.model is None:
