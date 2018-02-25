@@ -2,7 +2,7 @@ from matplotlib.offsetbox import AnchoredText
 from node2vec.node2vec import node2vec
 from sbm.sbm import stochastic_block_model
 import datetime
-import igraph
+import networkx as nx
 import itertools
 import glob
 import json
@@ -21,16 +21,16 @@ def get_name_to_date(G):
 
     Parameters
     ----------
-    G, the igraph object of (probably) SCOTUS dataset
+    G, the network object of (probably) SCOTUS dataset
 
     Output
     ------
     dict with keys being name, values being date in year
     """
     dates = {}
-    for v in G.vs:
-        date = float(str(v["year"]).strip())//1
-        dates[v["name"]] = int(date)
+    for v in G.nodes():
+        date = float(str(G.nodes[v]["year"]).strip())//1
+        dates[G.nodes[v]["name"]] = int(date)
     return dates
 
 def get_list_of_docs(dir_path='../data/scotus/textfiles/*.txt'):
@@ -102,24 +102,39 @@ def stratified_sample_split(class_to_id={},proportion_in_test=0.2):
     print("Total length of test indices: "+str(len(non_sampled_indices))+"\n"+str(non_sampled_indices))
     return sampled_indices, non_sampled_indices
 
-def load_scotus_network(file_path="../data/scotus/scotus_network.graphml"):
+def load_scotus_network(file_path="../data/scotus/scotus_network.graphml",undirected=True,relabel=True,force_issueArea=True):
     """
-    load the igraph network for the scotus dataset
+    load the networkx network for the scotus dataset
 
     Parameters
     ----------
-    file_path: location of .graphml
+    file_path: location of network
 
     Output
     ------
-    igraph object, dict like : {id : issueArea}
+    graph object; dict like : {id : issueArea}
     """
     print('FUNCTION NOT FULLY TESTED: load_scotus_network')
-    G = igraph.read(file_path)
-    issueAreas = {G.vs['id'][i] : int(G.vs['issueArea'][i]) for i in range(len(G.vs['id']))}
+    if '.graphml' in file_path:
+        G = nx.read_graphml(file_path)
+    elif '.adjlist' in file_path:
+        G = nx.read_adjlist(file_path)
+    else:
+        raise ValueError("Unsupported reading filetype")
+    if undirected:
+        G = G.to_undirected()
+    if relabel:
+        relabel_mapping = {}
+        for node_id in G.nodes():
+            relabel_mapping[node_id] = G.nodes[node_id]['name']
+        G = nx.relabel_nodes(G, relabel_mapping, copy=True)
+    if force_issueArea:
+        issueAreas = {node_id : int(G.nodes[node_id]['issueArea']) for node_id in G.nodes()}
+    else:
+        issueAreas = {node_id : int(G.nodes[node_id].get('issueArea',0)) for node_id in G.nodes()}
     return G, issueAreas
 
-def load_scotus_tf_idf(file_path="../data/scotus/tfidf_matrix.npz"):
+def load_scotus_tf_idf(file_path="../data/local/scotus/tfidf_matrix.npz"):
     """
     load the sparse tf-idf matrix for the scotus dataset
 
