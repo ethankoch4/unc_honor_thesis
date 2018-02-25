@@ -29,8 +29,8 @@ def get_name_to_date(G):
     """
     dates = {}
     for v in G.nodes():
-        date = float(str(G.nodes()[v]["year"]).strip())//1
-        dates[G.nodes()[v]["name"]] = int(date)
+        date = float(str(G[v]["year"]).strip())//1
+        dates[G[v]["name"]] = int(date)
     return dates
 
 def get_list_of_docs(dir_path='../data/scotus/textfiles/*.txt'):
@@ -126,12 +126,12 @@ def load_scotus_network(file_path="../data/scotus/scotus_network.graphml",undire
     if relabel:
         relabel_mapping = {}
         for node_id in G.nodes():
-            relabel_mapping[node_id] = G.nodes()[node_id]['name']
+            relabel_mapping[node_id] = G[node_id]['name']
         G = nx.relabel_nodes(G, relabel_mapping, copy=True)
     if force_issueArea:
-        issueAreas = {node_id : int(G.nodes[node_id]['issueArea']) for node_id in G.nodes()}
+        issueAreas = {node_id : int(G[node_id]['issueArea']) for node_id in G.nodes()}
     else:
-        issueAreas = {node_id : int(G.nodes[node_id].get('issueArea',0)) for node_id in G.nodes()}
+        issueAreas = {node_id : int(G[node_id].get('issueArea',0)) for node_id in G.nodes()}
     return G, issueAreas
 
 def load_scotus_tf_idf(file_path="../data/local/scotus/tfidf_matrix.npz"):
