@@ -6,7 +6,7 @@ def main():
 
       G, issueAreas = load_scotus_network('../data/scotus_network.graphml')
 
-      with open('../data/name_to_it.json', 'w') as fp:
+      with open('../data/name_to_ia.json', 'w') as fp:
           json.dump(issueAreas, fp)
       del issueAreas
 
@@ -24,7 +24,7 @@ def main():
 
       model = n2v.run_node2vec()
 
-      model.save('../data/scotus_n2v')
+      model.save('../data/scotus_n2v.node2vec')
 
 print('BEGINNING NODE2VEC SCRIPT')
 main()
