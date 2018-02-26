@@ -101,6 +101,7 @@ class doc2vec(object):
             walks_data = [walks_data[i] for i in range(len(labels))]
 
             kmeans = KMeans(n_clusters=n_clusters).fit(walks_data)
+            return kmeans
             
 
     def hierarchical_evaluate(self, embeddings, labels=[], n_clusters=2):
@@ -117,6 +118,7 @@ class doc2vec(object):
                                                     affinity='cosine',
                                                     linkage='average'
                                                     ).fit(walks_data)
+            return agglomerative
 
 
     def run_clustering(self, n_clusters=2,labels=[],evaluate=True):
