@@ -6,6 +6,8 @@ import networkx as nx
 import itertools
 import glob
 import json
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import os
@@ -432,40 +434,9 @@ def iterate_out_of_class_probs(start = 30,
     print("Time elapsed while running 'iterate_out_of_class_probs' function: {0}".format(round(time.clock()-start_time,8)))
     return bhamidi_scores_plot, bhamidi_medians, purity_scores_plot, purity_medians, agreement_scores_plot, agreement_medians, out_class_probs
 
-def save_current_status(file_name = 'current_status_resample_walks',
-                        out_class_probs=[],
-                        bhamidi_scores_plot=[],
-                        purity_scores_plot=[],
-                        agreement_scores_plot=[],
-                        bhamidi_medians=[],
-                        purity_medians=[],
-                        agreement_medians=[],
-                        walk_length = 'N/a',
-                        num_walks = 'N/a',
-                        num_nodes = 'N/a',
-                        n_classes = 'N/a',
-                        in_class_prob = 'N/a',
-                        iterations = 'N/a',
-                        p = 'N/a',
-                        q = 'N/a'):
+def save_current_status(file_name = 'current_status',**kwargs):
     # saving current status
-    current_status = {
-                    'iterations' : iterations,
-                    'walk_length' : walk_length,
-                    'num_walks' : num_walks,
-                    'num_nodes' : num_nodes,
-                    'n_classes' : n_classes,
-                    'in_class_prob' : in_class_prob,
-                    'p' : p,
-                    'q' : q,
-                    'bhamidi_scores_plot' : bhamidi_scores_plot,
-                    'bhamidi_medians' : bhamidi_medians,
-                    'purity_scores_plot' : purity_scores_plot,
-                    'purity_medians' : purity_medians,
-                    'agreement_scores_plot' : agreement_scores_plot,
-                    'agreement_medians' : agreement_medians,
-                    'out_class_probs' : out_class_probs
-                    }
+    kwargs.pop('file_name')
     # save to file (as json, obviously)
     with open(file_name+'.json', 'w') as fp:
         json.dump(current_status, fp)
@@ -478,7 +449,7 @@ def plot_save_scores(out_class_probs=[],
                      bhamidi_medians=None,
                      purity_medians=None,
                      agreement_medians=None,
-                     file_name='current_status_resample_walks',
+                     file_name='current_status',
                      walk_length = 'N/a',
                      num_walks = 'N/a',
                      num_nodes = 'N/a',
@@ -486,7 +457,7 @@ def plot_save_scores(out_class_probs=[],
                      in_class_prob = 'N/a',
                      iterations = 'N/a',
                      p = 'N/a',
-                     q = 'N/a'):
+                     q = 'N/a',**kwargs):
     plt.style.use('ggplot')
     # first plot : plot scores
     fig, ax = plt.subplots(figsize=(12, 8))
