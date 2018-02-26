@@ -36,7 +36,12 @@ class node2vec(object):
         else:
             nx_G = self.read_graph(Adj_M)
         self.G = Node2VecGraph(nx_G, False, p, q)
-        self.Adj_M = Adj_M
+        
+        if Adj_M is None:
+            self.Adj_M = nx.to_numpy_matrix(nx_G)
+        else:
+            self.Adj_M = Adj_M
+            
         self.evaluate = evaluate
         self.labels = labels
         self.n_classes = n_classes
@@ -87,6 +92,7 @@ class node2vec(object):
             self.bhamidi_score_kmeans = score_bhamidi(labels, list(kmeans.labels_))
             self.purity_score_kmeans = score_purity(labels, list(kmeans.labels_))
             self.agreement_score_kmeans = score_agreement(labels, list(kmeans.labels_))
+            return kmeans
 
     def hierarchical_evaluate(self, embeddings, labels=[], n_clusters=2):
         from sklearn.cluster import AgglomerativeClustering
@@ -106,3 +112,4 @@ class node2vec(object):
             self.bhamidi_score_hierarchical = score_bhamidi(labels, list(agglomerative.labels_))
             self.purity_score_hierarchical = score_purity(labels, list(agglomerative.labels_))
             self.agreement_score_hierarchical = score_agreement(labels, list(agglomerative.labels_))
+            return agglomerative
