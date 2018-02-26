@@ -5,8 +5,9 @@ from gensim import models
 # otherwise will be very slow (b.c. not using C)
 assert models.doc2vec.FAST_VERSION > -1
 
-import matplotlib.pyplot as plt
 import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 matplotlib.style.use('fivethirtyeight')
 import numpy as np
 
