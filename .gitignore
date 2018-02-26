@@ -6,6 +6,7 @@ __pycache__/
 # custom ignores
 *data/local/
 *plots/local/
+*.doc2vec*
 
 # C extensions
 *.so
