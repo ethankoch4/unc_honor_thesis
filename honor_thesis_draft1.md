@@ -21,9 +21,11 @@ Word2Vec is an embedding algorithm with the goal of generating a vector that cor
 
 ### 1.2    Brief Overview of Previous Models
 
-#### 1.2.1 Bag-of-Words (BOW)
+#### 1.2.1    Bag-of-Words (BOW)
 
-#### 1.2.2 Term
+#### 1.2.2    Term Frequency-Inverse Document Frequency
+
+#### 1.2.3    
 
 ### 1.2    Skip-gram Architecture
 
@@ -87,5 +89,5 @@ Word2Vec generates embeddings at a word-level. However, this is not useful if on
 
 blah blah blah blah
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5MTA1Nzc4NiwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbLTIwNDY4NzUxMCwzODEyNTQ4MDhdfQ==
 -->
