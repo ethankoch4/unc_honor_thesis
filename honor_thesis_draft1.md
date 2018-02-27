@@ -72,13 +72,17 @@ $$ \{((w_{o-j},\ w_o)\ |\ 0\leq o\leq V,\ -c\leq j \leq c,\ j\neq 0\} $$
 
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. In general, the two different architectures provide very similar results.
 
-### 1.4 SGD? 
+### 1.4 SGD? SOFTMAX?
+
+blah blah blah blah
 
 ## 2    Intro to Doc2Vec
 
 Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles. For this reason Doc2Vec was introduced by {SOURCE}. Doc2Vec generates embeddings for each document, $d_i \in \mathbb{R}^k$. What is considered a document is completely up to the researcher. In our case we consider each of the case opinions from SCOTUS to be a different document. Doc2Vec is almost identical to Word2Vec, with a few modifications. In fact, word embeddings are also generated as part of training a Doc2Vec model.
 
 ### 2.1 DBOW? DM?
+
+blah blah blah blah
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTAxNzU2MTUsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbMjEwNDgwODg1MCwzODEyNTQ4MDhdfQ==
 -->
