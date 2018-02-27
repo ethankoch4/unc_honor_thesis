@@ -76,7 +76,7 @@ The CBOW model is the one we chose to run on the SCOTUS corpus for performance r
 
 ## 2    Intro to Doc2Vec
 
-Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of d
+Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQxMDEzMjgwNl19
+eyJoaXN0b3J5IjpbLTYwOTY0NDAwN119
 -->
