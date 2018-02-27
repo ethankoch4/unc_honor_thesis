@@ -19,6 +19,12 @@ The goal of the Word2Vec algorithm is to generate a vector for every word in a c
 
 Word2Vec is an embedding algorithm with the goal of generating a vector that corresponds to a given word. This algorithm is not only the basis for many other similar embedding algorithms, but also has applications sentiment analysis, topic detection, and other NLP-related tasks. The goal of running Word2Vec on the SCOTUS corpus is to generate embeddings for the words used in Supreme Court cases for comparison with the same words used in non-legal contexts, in this case the GoogleNews embeddings {HELP}{SOURCE}.
 
+### 1.2    Brief Overview of Previous Models
+
+#### 1.2.1 Bag-of-Words (BOW)
+
+#### 1.2.2 Term
+
 ### 1.2    Skip-gram Architecture
 
 The skip-gram model takes a word as its input and has a goal of predicting the words around it during training. The skip-gram model was first introduced by {SOURCE}. In an effort to illustrate how this model works, let us use the following text as an example document:
@@ -81,5 +87,5 @@ Word2Vec generates embeddings at a word-level. However, this is not useful if on
 
 blah blah blah blah
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMTgxNTg0MywzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbMTY5MTA1Nzc4NiwzODEyNTQ4MDhdfQ==
 -->
