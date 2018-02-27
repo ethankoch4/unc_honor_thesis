@@ -62,7 +62,7 @@ $$w_o = \begin{bmatrix}
 				0 \\
          \end{bmatrix} $$
 
-This is called *one-hot encoding* and serves to isolate only the row in the matrix of learned parameters, $\theta$, which correspond to that word, $w_o$.
+This is called *one-hot encoding* and serves to isolate only the row in the matrix of learned parameters, $\theta$, which correspond to that word, $w_o$. However, in practice one typically uses key/value pairs for to avoid dealing with sparse inputs.
 
 The actual embedding generated, $v_o$, which corresponds to word $w_o$, is exactly the row that is isolated by multiplying our *one-hot encoded* input vector with the weight matrix:
 
@@ -93,5 +93,5 @@ PV-DBOW is most similar to the Word2Vec Skip-Gram architecture.
 
 ### 2.2     DM?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzM3NTMwNDA1LDM4MTI1NDgwOF19
+eyJoaXN0b3J5IjpbLTEwNDY3ODM4NDgsMzgxMjU0ODA4XX0=
 -->
