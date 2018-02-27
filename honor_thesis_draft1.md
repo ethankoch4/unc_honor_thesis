@@ -72,7 +72,7 @@ $$ \{((w_{o-j},\ w_o)\ |\ 0\leq o\leq V,\ -c\leq j \leq c,\ j\neq 0\} $$
 
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. In general, the two different architectures provide very similar results.
 
-### 1.4 SG
+### 1.4 SGD? 
 
 ## 2    Intro to Doc2Vec
 
@@ -80,5 +80,5 @@ Word2Vec generates embeddings at a word-level. However, this is not useful if on
 
 ### 2.1 DBOW? DM?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzgxMjU0ODA4LDE2MTY2MjY4NjBdfQ==
+eyJoaXN0b3J5IjpbLTE3OTAxNzU2MTUsMzgxMjU0ODA4XX0=
 -->
