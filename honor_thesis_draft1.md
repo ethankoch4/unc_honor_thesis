@@ -74,7 +74,7 @@ The CBOW model is the one we chose to run on the SCOTUS corpus for performance r
 
 ### 1.4 
 
-## 2    Intro to Doc2Vec 
+## 2    Intro to Doc2Vec Al
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyODc4MDQ4ODRdfQ==
+eyJoaXN0b3J5IjpbMTkzNTkxNjA5N119
 -->
