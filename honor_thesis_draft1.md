@@ -74,7 +74,7 @@ The CBOW model is the one we chose to run on the SCOTUS corpus for performance r
 
 ### 1.4 
 
-## 2    
+## 2    Intro to Doc2
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzODE3NzMyOV19
+eyJoaXN0b3J5IjpbLTE2MDQyNTI5NjhdfQ==
 -->
