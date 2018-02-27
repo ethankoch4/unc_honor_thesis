@@ -29,10 +29,6 @@ blah blah blah blah
 
 blah blah blah blah
 
-#### 1.2.3    
-
-blah blah blah blah
-
 ### 1.2    Skip-gram Architecture
 
 The skip-gram model takes a word as its input and has a goal of predicting the words around it during training. The skip-gram model was first introduced by {SOURCE}. In an effort to illustrate how this model works, let us use the following text as an example document:
@@ -91,9 +87,11 @@ blah blah blah blah
 
 Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles. For this reason Doc2Vec was introduced by {SOURCE}. Doc2Vec generates embeddings for each document, $d_i \in \mathbb{R}^k$. What is considered a document is completely up to the researcher. In our case we consider each of the case opinions from SCOTUS to be a different document. Doc2Vec is almost identical to Word2Vec, with a few modifications. In fact, word embeddings are also generated as part of training a Doc2Vec model.
 
-### 2.1 DBOW? DM?
+### 2.1    Distributed Bag of Words version of Paragraph Vector (PV-DBOW)
 
 blah blah blah blah
+
+### 2.2     DM?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMDA4Nzc1NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbNjcxODQwOTIzLDM4MTI1NDgwOF19
 -->
