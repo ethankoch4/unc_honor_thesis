@@ -29,7 +29,7 @@ blah blah blah blah
 
 blah blah blah blah
 
-### 1.2    Skip-gram Architecture
+### 1.2    Skip-gram (SG)
 
 The skip-gram model takes a word as its input and has a goal of predicting the words around it during training. The skip-gram model was first introduced by {SOURCE}. In an effort to illustrate how this model works, let us use the following text as an example document:
 
@@ -71,7 +71,7 @@ $$v_o = w_o^T \theta$$
 This is significantly different than the traditional settings where the quantities of interest are the output of a model, either predicted values or probabilities.
 
 {HELP} TALK ABOUT LOGISTIC REGRESSION, SOFTMAX, ETC.
-### 1.3    Continuous Bag-of-Words Architecture
+### 1.3    Continuous Bag of Words (CBOW)
 
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
 
@@ -89,9 +89,9 @@ Word2Vec generates embeddings at a word-level. However, this is not useful if on
 
 ### 2.1    Distributed Bag of Words version of Paragraph Vector (PV-DBOW)
 
-blah blah blah blah
+blah blah blah
 
 ### 2.2     DM?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjcxODQwOTIzLDM4MTI1NDgwOF19
+eyJoaXN0b3J5IjpbLTE1NDc3ODIxMDUsMzgxMjU0ODA4XX0=
 -->
