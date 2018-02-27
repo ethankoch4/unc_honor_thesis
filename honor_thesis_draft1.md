@@ -15,11 +15,9 @@ The Word2Vec algorithm was originally created by {SOURCE}. The algorithm has led
 
 ### 1.1    Motivation
 
-The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $w_i \in \mathbb{R}^k$, the direction $k_j$ itself is most likely uninterpretable in and of itself. [{HELP}: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity]
+The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $w_i \in \mathbb{R}^k$, the direction $k_j$ itself is most likely uninterpretable in and of itself. {HELP}: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity
 
-Word2Vec is an embedding algorithm with the goal of generating a vector that corresponds to a given word
-
- Doc2Vec, and Node2Vec } This algorithm is not only the basis for many other similar embedding algorithms, but also has applications sentiment analysis, topic detection, and other NLP-related tasks. The goal of running Word2Vec on the SCOTUS corpus is to generate embeddings for the words used in Supreme Court cases for comparison with the same words used in non-legal contexts, in this case the GoogleNews embeddings {HELP}{SOURCE}.
+Word2Vec is an embedding algorithm with the goal of generating a vector that corresponds to a given word. This algorithm is not only the basis for many other similar embedding algorithms, but also has applications sentiment analysis, topic detection, and other NLP-related tasks. The goal of running Word2Vec on the SCOTUS corpus is to generate embeddings for the words used in Supreme Court cases for comparison with the same words used in non-legal contexts, in this case the GoogleNews embeddings {HELP}{SOURCE}.
 
 ### 1.2    Skip-gram Architecture
 
@@ -83,5 +81,5 @@ Word2Vec generates embeddings at a word-level. However, this is not useful if on
 
 blah blah blah blah
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDA4NzU1NDQ5LDM4MTI1NDgwOF19
+eyJoaXN0b3J5IjpbLTEzMTgxNTg0MywzODEyNTQ4MDhdfQ==
 -->
