@@ -12,11 +12,11 @@ why must this be here....
 ## 1    Intro to Word2Vec
 
 The Word2Vec algorithm was originally created by [{SOURCE]}. The algorithm has led to many advances in fields such as Statistics, Natural Language Processing (NLP), [{HELP]} due to its drastic improvement over the previous state-of-the-art methods in retaining the meaning of each word in a corpus. Benefits of the use of the Word2Vec algorithm include: the dimensionality of embeddings is significantly less than the number of documents $D$ for any reasonably sized corpus, the embeddings are dense as opposed to sparse in the case of TF-IDF, the results of the algorithm [{HELP].
- }. It is also important to note that while Word2Vec has many different architectural choices and variations, the ones focused on in the theory portion of this paper will be those that offer the core intuition underlying the algorithm and are most widely used.
+. It is also important to note that while Word2Vec has many different architectural choices and variations, the ones focused on in the theory portion of this paper will be those that offer the core intuition underlying the algorithm and are most widely used.
 
 ### 1.1    Motivation
 
-The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $w_i \in \mathbb{R}^k$, the direction $k_j$ itself is most likely uninterpretable in and of itself. [{HELP: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity]
+The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $w_i \in \mathbb{R}^k$, the direction $k_j$ itself is most likely uninterpretable in and of itself. [{HELP}: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity]
 
 Word2Vec is an embedding algorithm with the goal of generating a vector that corresponds to a given word
 
@@ -84,5 +84,5 @@ Word2Vec generates embeddings at a word-level. However, this is not useful if on
 
 blah blah blah blah
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEwNDgwODg1MCwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbMTc3NzI0NTAsMzgxMjU0ODA4XX0=
 -->
