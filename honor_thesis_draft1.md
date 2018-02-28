@@ -77,7 +77,7 @@ The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the
 
 $$ \{(g(w_{o-j},\dots,w_{o+j}),\ w_o)\ |\ 0\leq o\leq V,\ j\neq 0\} $$
 
-Where $g$ is a function that concatenates or takes the average of the input v
+Where $g$ is a function that concatenates or takes the average of the input vectors
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. In general, the two different architectures provide very similar results.
 
 ### 1.4 SGD? SOFTMAX?
@@ -94,6 +94,6 @@ PV-DBOW is most similar to the Word2Vec Skip-Gram architecture.
 
 ### 2.2     DM?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM3NDkzNTc4MCwxMjA4MjUxOTc4LDM4MT
+eyJoaXN0b3J5IjpbLTI0MzkyNzI5NCwxMjA4MjUxOTc4LDM4MT
 I1NDgwOF19
 -->
