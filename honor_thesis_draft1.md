@@ -78,7 +78,7 @@ The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the
 $$ \{((w_{o-j},\dots,w_{o+j}),\ w_o)\ |\ 0\leq o\leq W,\ j\neq 0\} $$
 One may notice in the Skip-Gram model the input-output pairs we both of the same dimension, which is not true of the CBOW model. Because the dimension must be a single vector, on a word-level the goal becomes to maximize:
 
-$$ p(w_o|w_i; \theta) = \frac{exp(w_o^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w_i^T\theta)}$$
+$$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp(g(w_o^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w_i^T\theta)}$$
 $$g$$
 
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. In general, the two different architectures provide very similar results.
@@ -99,6 +99,6 @@ PV-DBOW is most similar to the Word2Vec Skip-Gram model.
 
 PV-DM is most similar to the Word2Vec CBOW model.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4NTI2MDkzLDEyMDgyNTE5NzgsMzgxMj
+eyJoaXN0b3J5IjpbNzIyMzk2MzczLDEyMDgyNTE5NzgsMzgxMj
 U0ODA4XX0=
 -->
