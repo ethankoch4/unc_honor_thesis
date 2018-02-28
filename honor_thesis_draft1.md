@@ -93,10 +93,12 @@ Word2Vec generates embeddings at a word-level. However, this is not useful if on
 
 ### 2.1    Distributed Bag of Words version of Paragraph Vector (PV-DBOW)
 
-PV-DBOW is most similar to the Word2Vec Skip-Gram architecture. 
+PV-DBOW is most similar to the Word2Vec Skip-Gram model. 
 
 ### 2.2     DM?
+
+PV-DM is most similar to the Word2Vec CBOW model.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDczNzc5Njg1LDEyMDgyNTE5NzgsMzgxMj
+eyJoaXN0b3J5IjpbMTc4NTI2MDkzLDEyMDgyNTE5NzgsMzgxMj
 U0ODA4XX0=
 -->
