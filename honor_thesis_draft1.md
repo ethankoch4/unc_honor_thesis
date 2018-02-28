@@ -75,7 +75,7 @@ This is significantly different than the traditional settings where the quantiti
 
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
 
-$$ \{((w_{o-j},\dots,w_{o+j}),\ w_o)\ |\ 0\leq o\leq V,\ j\neq 0\} $$
+$$ \{((w_{o-j},\dots,w_{o+j}),\ w_o)\ |\ 0\leq o\leq W,\ j\neq 0\} $$
 $$g$$
 Where $g$ is a function that concatenates or takes the average of the input vectors
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. In general, the two different architectures provide very similar results.
@@ -94,6 +94,6 @@ PV-DBOW is most similar to the Word2Vec Skip-Gram architecture.
 
 ### 2.2     DM?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIyMTA4OTIwNCwxMjA4MjUxOTc4LDM4MT
-I1NDgwOF19
+eyJoaXN0b3J5IjpbLTEyMzQzODg0MzcsMTIwODI1MTk3OCwzOD
+EyNTQ4MDhdfQ==
 -->
