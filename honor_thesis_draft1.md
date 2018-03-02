@@ -83,7 +83,17 @@ $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp(g(w_o)^T\theta)}{ \displayst
 Where $g$ is a concatenating or averaging function 
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question {SOURCE}
 
-### 1.4 SGD? SOFTMAX?
+### 1.4    Training the Model: Gradient Descent
+
+Gradient descent is carried out by taking steps in the negative direction proportional to the gradient at a given point. The process is carried out many times in order to find a local minimum. For numerical stability reasons, we can normalize the input variables to be centered at 0 and scaled to have equal variance \[17\]. Next, W and b are initialized to some starting values which will converge once the gradient descent is carried out. We initialize b and W by either letting them equal zero or randomly choosing the values from a standard Gaussian distribution. While regular gradient descent is simpler than its stochastic counterpart, it is generally difficult to scale to a larger W and b as well ast to larger datasets \[17\].
+
+6.7  Stochastic Gradient Descent (SGD)
+
+To handle large datasets, Stochastic Gradient Descent (SGD) is used. Rather than inputting the entire initial dataset, SGD takes a small sample of the total observations and performs gradient descent on that sample. This will only give an approximation of the true minimum of the function, but it will typically be a very good approximation over many iterations (many more than regular gradient descent). So while many iterations are required for SGD, each iteration is only evaluating a small sample \[17\]. This ends up being more efficient than few iterations with large samples. Similar to gradient descent, the mean of the inputs should be centered at 0, with equal, small variances. W is set as a random Gaussian distribution and b is set to 0.
+
+There are several extensions for SGD. The first is momentum, which is keeping track of the previous gradients in order to identify which general direction iterations are heading towards \[17\]. The second is AdaGrad which is less sensitive to hyper-parameters (initial learning rate, learning rate decay, momentum, batch size, weight initialization), but can tend to be worse than SGD when working with good parameters \[17\].
+
+Learning Rate Tuning is recognizing how quickly your model learns. Generally it is not the case that just because the models learns quickly that the model is learning well. When the model is not working as well as intended, lowering the learning rate should be the first adjustment.
 
 blah blah blah blah
 
@@ -99,6 +109,6 @@ PV-DBOW is most similar to the Word2Vec Skip-Gram model.
 
 PV-DM is most similar to the Word2Vec CBOW model.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI0ODM1MzYyNiwtOTA1NDc3NTIxLDEyMD
+eyJoaXN0b3J5IjpbMTkwNjkyOTYwMSwtOTA1NDc3NTIxLDEyMD
 gyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
