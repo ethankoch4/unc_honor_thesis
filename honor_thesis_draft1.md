@@ -87,7 +87,7 @@ $$\theta = \begin{bmatrix}
 		\vdots\ \ \ \ \ \ \ \vdots \ \ \ \ \ \ \  \vdots\\
 				\theta_{V,0},\ \dots,\ \theta_{V,s} \\
          \end{bmatrix}$$
-         where $s$ is the embedding size of the word vectors, chosen by f
+         where $s$ is the embedding size of the word vectors, chosen beforehand,
 >2. Calculate the gradient of the loss function over the entirety of the training data set
 >$$ 
 >3. Subtract 
@@ -120,6 +120,6 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDI1NjUwOTQsLTQyOTc3OTM3NiwtOT
-A1NDc3NTIxLDEyMDgyNTE5NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbMjY0MDY5NTMxLC0xOTQyNTY1MDk0LC05MD
+U0Nzc1MjEsMTIwODI1MTk3OCwzODEyNTQ4MDhdfQ==
 -->
