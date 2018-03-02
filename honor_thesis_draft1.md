@@ -102,11 +102,13 @@ PV-DM is most similar to the Word2Vec CBOW model.
 
 blah blah blah
 
-### 3.1    Graph f
+### 3.1    Graph Object
+
+
 
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzMjEwMjI1NywtOTA1NDc3NTIxLDEyMD
-gyNTE5NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbLTE2NjYzMDg0ODgsLTkwNTQ3NzUyMSwxMj
+A4MjUxOTc4LDM4MTI1NDgwOF19
 -->
