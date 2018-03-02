@@ -1,9 +1,3 @@
-usepackage{amssymb}
-    
-
-
-
-
 
 ## <center>Abstract</center>
 why must this be here....
@@ -116,6 +110,6 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5MDk3ODAzLC05MDU0Nzc1MjEsMTIwOD
-I1MTk3OCwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbMTI4MjYzOTU0MiwtOTA1NDc3NTIxLDEyMD
+gyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
