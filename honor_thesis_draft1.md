@@ -9,27 +9,27 @@ usepackage{amssymb}
 why must this be here....
 :  asdlfkjalsdj asdf asd asd  omo o, om om okmomk omokmok mmo om okm om om
 
-# 1    Intro to Word2Vec
+# 1&nbsp;&nbsp;&nbsp;&nbsp;Intro to Word2Vec
 
 The Word2Vec algorithm was originally created by {SOURCE}. The algorithm has led to many advances in fields such as Statistics, Natural Language Processing (NLP), {HELP} due to its drastic improvement over the previous state-of-the-art methods in retaining the meaning of each word in a corpus. Benefits of the use of the Word2Vec algorithm include: the dimensionality of embeddings is significantly less than the number of documents $D$ for any reasonably sized corpus, the embeddings are dense as opposed to sparse in the case of TF-IDF, the results of the algorithm {HELP}. It is also important to note that while Word2Vec has many different architectural choices and variations, the ones focused on in the theory portion of this paper will be those that offer the core intuition underlying the algorithm and are most widely used.
 
-## 1.1    Motivation
+## 1.1&nbsp;&nbsp;&nbsp;&nbsp;Motivation
 
 The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $w_i \in \mathbb{R}^k$, the direction $k_j$ itself is most likely uninterpretable in and of itself. {HELP}: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity
 
 Word2Vec is an embedding algorithm with the goal of generating a vector that corresponds to a given word. This algorithm is not only the basis for many other similar embedding algorithms, but also has applications sentiment analysis, topic detection, and other NLP-related tasks. The goal of running Word2Vec on the SCOTUS corpus is to generate embeddings for the words used in Supreme Court cases for comparison with the same words used in non-legal contexts, in this case the GoogleNews embeddings {HELP}{SOURCE}.
 
-## 1.2    Brief Overview of Previous Models
+## 1.2&nbsp;&nbsp;&nbsp;&nbsp;Brief Overview of Previous Models
 
-### 1.2.1    Bag-of-Words (BOW)
-
-blah blah blah blah
-
-### 1.2.2    Term Frequency-Inverse Document Frequency
+### 1.2.1&nbsp;&nbsp;&nbsp;&nbsp;Bag-of-Words (BOW)
 
 blah blah blah blah
 
-## 1.2    Skip-gram (SG)
+### 1.2.2&nbsp;&nbsp;&nbsp;&nbsp;Term Frequency-Inverse Document Frequency
+
+blah blah blah blah
+
+## 1.2&nbsp;&nbsp;&nbsp;&nbsp;Skip-gram (SG)
 
 The skip-gram model takes a word as its input and has a goal of predicting the words around it during training. The skip-gram model was first introduced by {SOURCE}. In an effort to illustrate how this model works, let us use the following text as an example document:
 
@@ -71,7 +71,7 @@ $$v_o = w_o^T \theta$$
 This is significantly different than the traditional settings where the quantities of interest are the output of a model, either predicted values or probabilities.
 
 {HELP} TALK ABOUT LOGISTIC REGRESSION, SOFTMAX, ETC.
-## 1.3    Continuous Bag of Words (CBOW)
+## 1.3&nbsp;&nbsp;&nbsp;&nbsp;Continuous Bag of Words (CBOW)
 
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
 
@@ -83,7 +83,7 @@ $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp(g(w_o)^T\theta)}{ \displayst
 Where $g$ is a concatenating or averaging function 
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question {SOURCE}
 
-## 1.4    Training the Model: Stochastic Gradient Descent
+## 1.4&nbsp;&nbsp;&nbsp;&nbsp;Training the Model: Stochastic Gradient Descent
 
 In Word2Vec, Doc2Vec, and Node2Vec, Stochastic Gradient Descent (SGD) is the optimization method we used to tune the parameters of the model. SGD is a form of Gradient Descent that is defined by the following steps:
 >1. Choose initial parameters, typically randomly selected from a probability distribution
@@ -116,6 +116,6 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU0NDMyOTA2NywtOTA1NDc3NTIxLDEyMD
-gyNTE5NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbMTY5MDk3ODAzLC05MDU0Nzc1MjEsMTIwOD
+I1MTk3OCwzODEyNTQ4MDhdfQ==
 -->
