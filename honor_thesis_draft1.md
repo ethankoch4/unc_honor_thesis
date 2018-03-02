@@ -81,7 +81,7 @@ One may notice in the Skip-Gram model the input-output pairs we both of the same
 $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp(g(w_o)^T\theta)}{ \displaystyle\sum_{i=0}^V exp(g(w_i)^T\theta)}$$
 
 Where $g$ is a concatenating or averaging function 
-The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is 
+The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question
 
 ### 1.4 SGD? SOFTMAX?
 
@@ -99,6 +99,6 @@ PV-DBOW is most similar to the Word2Vec Skip-Gram model.
 
 PV-DM is most similar to the Word2Vec CBOW model.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkyNTgyODA2LC05MDU0Nzc1MjEsMTIwOD
-I1MTk3OCwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbMTA0NTU1NjQ1OSwtOTA1NDc3NTIxLDEyMD
+gyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
