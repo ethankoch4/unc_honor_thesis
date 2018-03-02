@@ -83,8 +83,9 @@ In Word2Vec, Doc2Vec, and Node2Vec, Stochastic Gradient Descent (SGD) is the opt
 >1. Choose initial parameters, typically randomly selected from a probability distribution:
 $$\theta = \begin{bmatrix}
 			\theta_{0,0}, \dots, \theta_{0,s} \\
-		\vdots\ \ \ \ \ \ \vdots \ \ \ \ \ \  \vdots\\
-				\theta_{V,0}, \dots, \theta_{0,s} \\
+		\vdots\ \ \ \ \ \ \ \vdots \ \ \ \ \ \ \  \vdots\\
+		\vdots\ \ \ \ \ \ \ \vdots \ \ \ \ \ \ \  \vdots\\
+				\theta_{V,0},\ \dots,\ \theta_{V,s} \\
          \end{bmatrix}$$
 >2. Calculate the gradient of the loss function over the entirety of the training data set
 >3. Subtract 
@@ -117,6 +118,6 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY4ODUwMjY0LC05MDU0Nzc1MjEsMTIwOD
-I1MTk3OCwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbMTUzNzEzMzMxNCwtOTA1NDc3NTIxLDEyMD
+gyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
