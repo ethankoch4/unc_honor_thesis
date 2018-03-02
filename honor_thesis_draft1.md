@@ -85,7 +85,10 @@ The CBOW model is the one we chose to run on the SCOTUS corpus for performance r
 
 ### 1.4    Training the Model: Stochastic Gradient Descent
 
-In Word2Vec, Doc2Vec, and Node2Vec, Stochastic Gradient Descent (SGD) is the optimization method we used to tune the parameters of the model. The first step in SGD is to choose a starting point for the parameters. Typically, 
+In Word2Vec, Doc2Vec, and Node2Vec, Stochastic Gradient Descent (SGD) is the optimization method we used to tune the parameters of the model. SGD is a form of Gradient Descent that is defined by the following steps:
+> 1. fasdlkj
+> 2. 
+The first step in SGD is to choose a starting point for the parameters. Typically, 
 ## 2    Intro to Doc2Vec
 
 Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles. For this reason Doc2Vec was introduced by {SOURCE}. Doc2Vec generates embeddings for each document, $d_i \in \mathbb{R}^k$. What is considered a document is completely up to the researcher. In our case we consider each of the case opinions from SCOTUS to be a different document. Doc2Vec is almost identical to Word2Vec, with a few modifications. In fact, word embeddings are also generated as part of training a Doc2Vec model.
@@ -112,6 +115,6 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU5NjY2MDgxMiwtOTA1NDc3NTIxLDEyMD
+eyJoaXN0b3J5IjpbMjAwNTUxMDk3MiwtOTA1NDc3NTIxLDEyMD
 gyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
