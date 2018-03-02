@@ -104,11 +104,14 @@ blah blah blah
 
 ### 3.1    Graph Object
 
+blah blah blah
+
 ### 3.2    Random Walk
 
+blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgzMjU5OTIyMCwtOTA1NDc3NTIxLDEyMD
+eyJoaXN0b3J5IjpbMTcwNjgzNDYxMiwtOTA1NDc3NTIxLDEyMD
 gyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
