@@ -75,6 +75,8 @@ One may notice in the Skip-Gram model the input-output pairs are both of the sam
 $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{\mathcal{e}^{\big(g(w_{o-j}^T\theta,\ \dots\ ,\ w_{o+j}^T\theta)\big)}}{ \displaystyle\sum_{i=0}^V \mathcal{e}^{\big(w_i^T\theta\big)}}$$
 
 
+One can also define $g$ to be a concatenation function. Though there is 
+
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question {SOURCE}.
 
 {HELP} {EXTEND THIS SECTION A BIT?}
@@ -123,7 +125,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDA2MDc2MTMwLDEyMzQwNTY3NjAsMTU0OD
-U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
-NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbMTQ3NTY5NDYxNywxMjM0MDU2NzYwLDE1ND
+g1NTEyMDIsLTE5NDI1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUx
+OTc4LDM4MTI1NDgwOF19
 -->
