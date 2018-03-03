@@ -84,9 +84,9 @@ In Word2Vec, Doc2Vec, and Node2Vec, Stochastic Gradient Descent (SGD) is the opt
 $$\theta = \begin{bmatrix}
 			\theta_{0,0} & \theta_{0,1} & \dots & \theta_{0,s} \\
 			\theta_{1,0} & \theta_{1,1} & \dots & \theta_{1,s} \\
-			\vdots & \ddots & \vdots \\
-				\theta_{V,0},&\dots &\theta_{V,s} \\
-         \end{bmatrix},\ \theta_{i,j}\ chosen from \  \Theta $$ 
+			\vdots & \vdots & \ddots & \vdots \\
+			\theta_{V,0} & \theta_{V,1} & \dots &\theta_{V,s} \\
+			         \end{bmatrix},\ \theta_{i,j}\ chosen from \  \Theta $$ 
          where $\Theta$ is some probability distribution, often $U[0,1]$ or $N(0,1)$. In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
 >2. Calculate the gradient of the loss function over the entirety of the training data set. The parameters, $\theta$, become itself mines the calculated gradient with a learning rate.
 >$$ \theta = \theta - \alpha \nabla_{\theta}L(\theta)$$
@@ -121,7 +121,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0ODkwNTU2NjgsMTU0ODU1MTIwMiwtMT
-k0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5NzgsMzgxMjU0
-ODA4XX0=
+eyJoaXN0b3J5IjpbMTE3MTIwNzI3MiwxNTQ4NTUxMjAyLC0xOT
+QyNTY1MDk0LC05MDU0Nzc1MjEsMTIwODI1MTk3OCwzODEyNTQ4
+MDhdfQ==
 -->
