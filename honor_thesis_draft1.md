@@ -39,7 +39,7 @@ $$(Happy, families), (unhappy, family),$$$$(family , is), (families,are)$$
 
 With this in mind, we can think about the model embedding words that appear in similar contexts near to each other. The third and fourth pairs should push the model toward embedding *is* and *are* near each other because they both appear within the context of some form of the word *family*. Mathematically, our goal is to maximize:
 
-$$ p(w_o|w_i; \theta) = \frac{exp(w_o^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w_i^T\theta)}$$
+$$ p(w_j|w_i; \theta) = \frac{exp(w_j^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w_i^T\theta)}$$
 
 for a given word, $w_o$. We have seen the value we wish to maximize for a single example. However, in terms of the entirety of our corpus, we wish to find the $\theta$ which maximizes:
 
@@ -71,7 +71,7 @@ The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the
 $$ \{((w_{o-c},\dots,w_{o+c}),\ w_o)\ |\ 0\leq o\leq W\} $$
 One may notice in the Skip-Gram model the input-output pairs we both of the same dimension. This is not true of the CBOW model. Because the dimension must be a single vector, on a word-level the goal becomes to maximize:
 
-$$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp(g(w_o^T\theta))}{ \displaystyle\sum_{i=0}^V exp(g(w_i)^T\theta)}$$
+$$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp(g(w_o)^T\theta)}{ \displaystyle\sum_{i=0}^V exp(g(w_i)^T\theta)}$$
 
 Where $g$ is a concatenating or averaging function which then is multiplied 
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question {SOURCE}.
@@ -122,7 +122,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODMyMDY0MTAzLDEyMzQwNTY3NjAsMTU0OD
-U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
-NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbLTEzOTExODIyOTUsMTIzNDA1Njc2MCwxNT
+Q4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1MjEsMTIwODI1
+MTk3OCwzODEyNTQ4MDhdfQ==
 -->
