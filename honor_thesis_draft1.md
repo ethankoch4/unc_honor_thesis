@@ -91,7 +91,7 @@ $$\theta = \begin{bmatrix}
 >$$ \theta = \theta - \alpha \nabla_{\theta}L(\theta)$$
 >3. Repeat step 2 until some convergence rule is achieved. This typically is a set number of iterations or when the gradient becomes sufficiently small.
 
-Stochastic Gradient Descent is almost exactly Gradient Descent, with a small change for mostly computational purposes. It is very expensive to calculate $\nabla_{\theta}L(\theta)$, so instead we use Stochastic Gradient Descent. The difference is that step 2 is not done for every example in the training set. Instead, a subset of examples are randomly chosen from the training set when calculating the gradient of the loss function. SGD will often converge to a gl
+Stochastic Gradient Descent is almost exactly Gradient Descent, with a small change for mostly computational purposes. It is very expensive to calculate $\nabla_{\theta}L(\theta)$, so instead we use Stochastic Gradient Descent. The difference is that step 2 is not done for every example in the training set. Instead, a subset of examples are randomly chosen from the training set when calculating the gradient of the loss function. SGD will often converge to a global minimum, 
 # 2&nbsp;&nbsp;&nbsp;&nbsp;Intro to Doc2Vec
 
 Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles. For this reason Doc2Vec was introduced by {SOURCE}. Doc2Vec generates embeddings for each document, $d_i \in \mathbb{R}^k$. What is considered a document is completely up to the researcher. In our case we consider each of the case opinions from SCOTUS to be a different document. Doc2Vec is almost identical to Word2Vec, with a few modifications. In fact, word embeddings are also generated as part of training a Doc2Vec model.
@@ -118,7 +118,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzE3MjU5MDg3LDE1NDg1NTEyMDIsLTE5ND
-I1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUxOTc4LDM4MTI1NDgw
-OF19
+eyJoaXN0b3J5IjpbMjA1OTcxODg5NSwxNTQ4NTUxMjAyLC0xOT
+QyNTY1MDk0LC05MDU0Nzc1MjEsMTIwODI1MTk3OCwzODEyNTQ4
+MDhdfQ==
 -->
