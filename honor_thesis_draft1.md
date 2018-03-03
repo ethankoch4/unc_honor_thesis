@@ -69,7 +69,7 @@ This is significantly different than the traditional settings where the quantiti
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
 
 $$ \{((w_{o-c},\dots,w_{o+c}),\ w_o)\ |\ 0\leq o\leq W\} $$
-One may notice in the Skip-Gram model the input-output pairs we both of the same dimension, which is not true of the CBOW model. Because the dimension must be a single vector, on a word-level the goal becomes to maximize:
+One may notice in the Skip-Gram model the input-output pairs we both of the same dimension. This is not true of the CBOW model. Because the dimension must be a single vector, on a word-level the goal becomes to maximize:
 
 $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp(g(w_o)^T\theta)}{ \displaystyle\sum_{i=0}^V exp(g(w_i)^T\theta)}$$
 
@@ -122,7 +122,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc4MzkyNzYxNSwxMjM0MDU2NzYwLDE1ND
-g1NTEyMDIsLTE5NDI1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUx
-OTc4LDM4MTI1NDgwOF19
+eyJoaXN0b3J5IjpbNDMwMTg1ODcyLDEyMzQwNTY3NjAsMTU0OD
+U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
+NzgsMzgxMjU0ODA4XX0=
 -->
