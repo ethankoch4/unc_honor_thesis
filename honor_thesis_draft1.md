@@ -64,7 +64,6 @@ $$v_o = w_o^T \theta$$
 
 This is significantly different than the traditional settings where the quantities of interest are the output of a model, either predicted values or probabilities.
 
-{HELP} TALK ABOUT LOGISTIC REGRESSION, SOFTMAX, ETC.
 ## 1.3&nbsp;&nbsp;&nbsp;&nbsp;Continuous Bag of Words (CBOW)
 
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
@@ -75,7 +74,9 @@ One may notice in the Skip-Gram model the input-output pairs we both of the same
 $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp(g(w_o)^T\theta)}{ \displaystyle\sum_{i=0}^V exp(g(w_i)^T\theta)}$$
 
 Where $g$ is a concatenating or averaging function 
-The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question {SOURCE}
+The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question {SOURCE}.
+
+{HELP} {EXTEND THIS SECTION A BIT?}
 
 ## 1.4&nbsp;&nbsp;&nbsp;&nbsp;Training the Model: Stochastic Gradient Descent
 
@@ -111,17 +112,17 @@ PV-DM is most similar to the Word2Vec CBOW model.
 
 blah blah blah
 
-## 3.1    Graph Object
+## 3.1&nbsp;&nbsp;&nbsp;&nbsp;Graph Object
 
 blah blah blah
 
-## 3.2    Random Walk
+## 3.2&nbsp;&nbsp;&nbsp;&nbsp;Random Walk
 
 blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQzMzA0NDMyLDEyMzQwNTY3NjAsMTU0OD
-U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
-NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbMTM5MzQ3NDk0OCwxMjM0MDU2NzYwLDE1ND
+g1NTEyMDIsLTE5NDI1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUx
+OTc4LDM4MTI1NDgwOF19
 -->
