@@ -76,7 +76,7 @@ $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{\mathcal{e}^{\big(g(w_{o-j}^T\th
 
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question {SOURCE}.
 
-In order to give a firm understanding of the model I have presented CBOW as using the words on either side of a given word, $w_o$, to predict $w_o$ and thereby generate embeddings. However, often times CBOW, as well as other word embeddings models, will f
+In order to give a firm understanding of the model I have presented CBOW as using the words on either side of a given word, $w_o$, to predict $w_o$ and thereby generate embeddings. However, often times CBOW, as well as other word embeddings models, will 
 
 {HELP} {EXTEND THIS SECTION A BIT?}
 
@@ -124,7 +124,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3MzM3OTgyMiw1NjY1NTE2MDAsMTIzND
-A1Njc2MCwxNTQ4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1
-MjEsMTIwODI1MTk3OCwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbNTY2NTUxNjAwLDU2NjU1MTYwMCwxMjM0MD
+U2NzYwLDE1NDg1NTEyMDIsLTE5NDI1NjUwOTQsLTkwNTQ3NzUy
+MSwxMjA4MjUxOTc4LDM4MTI1NDgwOF19
 -->
