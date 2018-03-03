@@ -72,7 +72,7 @@ The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the
 $$ \{\big((w_{o-c},\dots,w_{o+c}),\ w_o\big)\ |\ 0\leq o\leq W,\  c \neq 0\} $$
 One may notice in the Skip-Gram model the input-output pairs are both of the same dimension. This is not true of the CBOW model. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\to \mathbb{R}^V$ to be an element-wise averaging function which then is multiplied  on a word-level the goal becomes to maximize:
 
-$$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp\big(g(w_{o-j},\dots,w_{o+j}\big)}{ \displaystyle\sum_{i=0}^V exp\big(g(w_i)^T\theta\big)}$$
+$$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp\big(g(w_{o-j},\dots,w_{o+j})\big)}{ \displaystyle\sum_{i=0}^V exp\big(g(w_i)^T\theta\big)}$$
 
 
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question {SOURCE}.
@@ -123,7 +123,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQ0NTQwOTgzLDEyMzQwNTY3NjAsMTU0OD
-U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
-NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbMTY5NzA0MjE3NiwxMjM0MDU2NzYwLDE1ND
+g1NTEyMDIsLTE5NDI1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUx
+OTc4LDM4MTI1NDgwOF19
 -->
