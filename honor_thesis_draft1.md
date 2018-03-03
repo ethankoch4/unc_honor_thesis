@@ -69,7 +69,7 @@ This is significantly different than the traditional settings where the quantiti
 
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
 
-$$ \{\big((w_{o-c},\dots,w_{o+c}),\ w_o\big)\ |\ 0\leq o\leq W,\  c \neq 0\} $$
+$$ \{\big((w_{o-c},\dots,w_{o+c}),\ w_o\big)\ |\ c\leq o\leq W-c,\  c \neq 0\} $$
 One may notice in the Skip-Gram model the input-output pairs are both of the same dimension. This is not true of the CBOW model. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\to \mathbb{R}^V$ to be an element-wise averaging function (one can also define it as a concatenating function) so that on a word-level the goal becomes to maximize:
 
 $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{\mathcal{e}^{\big(g(w_{o-j}^T\theta,\ \dots\ ,\ w_{o+j}^T\theta)\big)}}{ \displaystyle\sum_{i=0}^V \mathcal{e}^{\big(w_i^T\theta\big)}}$$
@@ -78,7 +78,7 @@ The CBOW model is the one we chose to run on the SCOTUS corpus for performance r
 
 In order to give a firm understanding of the model I have presented CBOW as using the words on either side of a given word, $w_o$, to predict $w_o$ and thereby generate embeddings. However, often times CBOW, as well as other word embeddings models, will choose $w_o$ to the word directly *after* the context. The input-output pairs are then generated in the following way:
 
-$$ \{\big((w_{o-c},\ w_{o-c},\dots,w_{o-1}),\ w_o\big)\ |\ 0\leq o\leq W,\  c \neq 0\} $$
+$$ \{\big((w_{o-c},w_{o-c+1},\dots,w_{o-1}),\ w_o\big)\ |\ c\leq o\leq W\} $$
 
 In fact, one can even choose $w_o$ to be the word directly *before* the context. However, these variations do not really alter the results of the CBOW model, they are merely preferential {SOURCE}.
 {HELP} {EXTEND THIS SECTION A BIT?}
@@ -127,7 +127,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc4Mjc2NDcwMyw1NjY1NTE2MDAsMTIzND
-A1Njc2MCwxNTQ4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1
-MjEsMTIwODI1MTk3OCwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbLTIwMjI2MDc4MjIsNTY2NTUxNjAwLDEyMz
+QwNTY3NjAsMTU0ODU1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3
+NTIxLDEyMDgyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
