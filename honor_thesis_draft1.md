@@ -31,7 +31,7 @@ $$"Happy\ families\ are\ all\ alike;\ every\ unhappy\ family\ is\ unhappy\ in\ i
 
 This is the first line of *Anna Karenina* by Leo Tolstoy. Given a document of text, we generate these input-output pairs by first specifying $c$, the size of the context or window. The set of observations in the skip-gram model is then:
 
-$$ \{(w_o,\ w_{o-j})\ |\ 0\leq o\leq W,\ -c\leq j \leq c,\ j\neq 0\} $$
+$$ \{(w_o,\ w_{j-i})\ |\ 0\leq o\leq W,\ -c\leq i \leq c,\ i\neq 0\} $$
 
 Where $W$ is the number of words in our corpus. Similarly, we define $V$ as the number of *unique* words in our corpus. Now, if we specify $c$ to be 2 in our example, then some of the input-output pairs would be:
 
@@ -122,7 +122,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzMDc0NDUxOSwxMjM0MDU2NzYwLDE1ND
+eyJoaXN0b3J5IjpbMTE5Nzg4NDg5NywxMjM0MDU2NzYwLDE1ND
 g1NTEyMDIsLTE5NDI1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUx
 OTc4LDM4MTI1NDgwOF19
 -->
