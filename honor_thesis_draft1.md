@@ -31,7 +31,7 @@ $$"Happy\ families\ are\ all\ alike;\ every\ unhappy\ family\ is\ unhappy\ in\ i
 
 This is the first line of *Anna Karenina* by Leo Tolstoy. Given a document of text, we generate these input-output pairs by first specifying $c$, the size of the context or window. The set of observations in the skip-gram model is then:
 
-$$ \{(w_i,\ w_{o})\ |\ 0\leq i\leq W,\ -c +i\leq o \leq c,\ o\neq 0\} $$
+$$ \{(w_i,\ w_{o})\ |\ 0\leq i\leq W,\ -c +i\leq o \leq c+i,\ o\neq 0\} $$
 
 Where $W$ is the number of words in our corpus. Similarly, we define $V$ as the number of *unique* words in our corpus. Now, if we specify $c$ to be 2 in our example, then some of the input-output pairs would be:
 
@@ -39,7 +39,7 @@ $$(Happy, families),\ (unhappy, family),$$$$(family , is),\ (families,are)$$
 
 With this in mind, we can think about the model embedding words that appear in similar contexts near to each other. The third and fourth pairs should push the model toward embedding *is* and *are* near each other because they both appear within the context of some form of the word *family*. Mathematically, our goal is to maximize:
 
-$$ p(w_j|w_i; \theta) = \frac{exp(w_j^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w_i^T\theta)}$$
+$$ p(w_o|w_i; \theta) = \frac{exp(w_j^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w_i^T\theta)}$$
 
 for a given word, $w_j$. We have seen the value we wish to maximize for a single example. However, in terms of the entirety of our corpus, we wish to find the $\theta$ which maximizes:
 
@@ -122,7 +122,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjMwNDY0NDY0LDEyMzQwNTY3NjAsMTU0OD
-U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
-NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbLTEwMTU1NzgwOTksMTIzNDA1Njc2MCwxNT
+Q4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1MjEsMTIwODI1
+MTk3OCwzODEyNTQ4MDhdfQ==
 -->
