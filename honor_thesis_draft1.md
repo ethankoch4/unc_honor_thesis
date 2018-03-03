@@ -80,7 +80,7 @@ In order to give a firm understanding of the model I have presented CBOW as usin
 
 $$ \{\big((w_{o-c},\dots,w_{o+c}),\ w_o\big)\ |\ 0\leq o\leq W,\  c \neq 0\} $$
 
-In fact, one can even choose $w_o$ to be the word directly *before* the context. These variations do not f
+In fact, one can even choose $w_o$ to be the word directly *before* the context. However, these variations do not alter the results of the model
 {HELP} {EXTEND THIS SECTION A BIT?}
 
 ## 1.4&nbsp;&nbsp;&nbsp;&nbsp;Training the Model: Stochastic Gradient Descent
@@ -127,7 +127,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MjE4MTM1NzQsNTY2NTUxNjAwLDEyMz
-QwNTY3NjAsMTU0ODU1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3
-NTIxLDEyMDgyNTE5NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbLTMzMTYyMDk4NCw1NjY1NTE2MDAsMTIzND
+A1Njc2MCwxNTQ4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1
+MjEsMTIwODI1MTk3OCwzODEyNTQ4MDhdfQ==
 -->
