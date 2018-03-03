@@ -45,7 +45,6 @@ for a given word, $w_j$. We have seen the value we wish to maximize for a single
 
 $$ L(\theta) = \frac{1}{V} \displaystyle\sum_{i=0}^V \displaystyle\sum_{o = -c,\ o\neq 0}^c log\ p(w_o|w_i; \theta) $$
 
-
 In this setting, $w_o$ represents a vector of zeros with length $V$, where the $o^{th}$ entry is $1$.  I will also refer to it as the word it represents.
 
 $$w_o = \begin{bmatrix}
@@ -69,7 +68,7 @@ This is significantly different than the traditional settings where the quantiti
 
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
 
-$$ \{\big((w_{o-c},\dots,w_{o+c}),\ w_o\big)\ |\ c\leq o\leq W-c,\  c \neq 0\} $$
+$$ \{\big((w_{o-c/2},\dots,w_{o+c/2}),\ w_o\big)\ |\ \frac{c}2\leq o\leq W-c,\  c \neq 0\} $$
 One may notice in the Skip-Gram model the input-output pairs are both of the same dimension. This is not true of the CBOW model. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\to \mathbb{R}^V$ to be an element-wise averaging function (one can also define it as a concatenating function) so that on a word-level the goal becomes to maximize:
 
 $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{\mathcal{e}^{\big(g(w_{o-j}^T\theta,\ \dots\ ,\ w_{o+j}^T\theta)\big)}}{ \displaystyle\sum_{i=0}^V \mathcal{e}^{\big(w_i^T\theta\big)}}$$
@@ -127,7 +126,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0ODYzOTM4MzQsNTY2NTUxNjAwLDEyMz
+eyJoaXN0b3J5IjpbLTE1MDE1ODM3NjQsNTY2NTUxNjAwLDEyMz
 QwNTY3NjAsMTU0ODU1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3
 NTIxLDEyMDgyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
