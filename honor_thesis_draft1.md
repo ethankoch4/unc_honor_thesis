@@ -79,8 +79,9 @@ In order to give a firm understanding of the model I have presented CBOW as usin
 
 $$ \{\big((w_{o-c},w_{o-c+1},\dots,w_{o-1}),\ w_o\big)\ |\ c\leq o\leq W\} $$
 
-In fact, one can even choose $w_o$ to be the word directly *before* the context. However, these variations do not really alter the results of the CBOW model, they are merely preferential {SOURCE}.
-{HELP} {EXTEND THIS SECTION A BIT?}
+In fact, one can even choose $w_o$ to be the word directly *before* the context. However, these variations do not really alter the results of the CBOW model. They are merely preferential {SOURCE}.
+
+Furthermore, there are 
 
 ## 1.4&nbsp;&nbsp;&nbsp;&nbsp;Training the Model: Stochastic Gradient Descent
 
@@ -126,7 +127,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDEzMzg3MDgsNTY2NTUxNjAwLDEyMz
+eyJoaXN0b3J5IjpbLTE1NzY2MzYxNjAsNTY2NTUxNjAwLDEyMz
 QwNTY3NjAsMTU0ODU1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3
 NTIxLDEyMDgyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
