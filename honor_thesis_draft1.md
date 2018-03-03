@@ -86,12 +86,12 @@ $$\theta = \begin{bmatrix}
 			\vdots & \ddots & \vdots \\
 				\theta_{V,0},&\dots &\theta_{V,s} \\
          \end{bmatrix},\ \theta_{i,j}\ chosen from \  \Theta $$ 
-         where $\Theta$ is some probability distribution, often $U[0,1]$. In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
+         where $\Theta$ is some probability distribution, often $U[0,1]$ or $N(0,1)$. In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
 >2. Calculate the gradient of the loss function over the entirety of the training data set. The parameters, $\theta$, become itself mines the calculated gradient with a learning rate.
 >$$ \theta = \theta - \alpha \nabla_{\theta}L(\theta)$$
 >3. Repeat step 2 until some convergence rule is achieved. This typically is a set number of iterations or when the gradient becomes sufficiently small.
 
-The first step in SGD is to choose a starting point for the parameters. 
+Stochastic Gradient Descent is almost exactly Gradient Descent, with a small change 
 # 2&nbsp;&nbsp;&nbsp;&nbsp;Intro to Doc2Vec
 
 Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles. For this reason Doc2Vec was introduced by {SOURCE}. Doc2Vec generates embeddings for each document, $d_i \in \mathbb{R}^k$. What is considered a document is completely up to the researcher. In our case we consider each of the case opinions from SCOTUS to be a different document. Doc2Vec is almost identical to Word2Vec, with a few modifications. In fact, word embeddings are also generated as part of training a Doc2Vec model.
@@ -118,7 +118,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NzEzOTY5MjAsMTU0ODU1MTIwMiwtMT
+eyJoaXN0b3J5IjpbLTIwNjE1MzQ3MzEsMTU0ODU1MTIwMiwtMT
 k0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5NzgsMzgxMjU0
 ODA4XX0=
 -->
