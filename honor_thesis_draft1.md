@@ -39,7 +39,7 @@ $$(Happy, families),\ (unhappy, family),$$$$(family , is),\ (families,are)$$
 
 With this in mind, we can think about the model embedding words that appear in similar contexts near to each other. The third and fourth pairs should push the model toward embedding *is* and *are* near each other because they both appear within the context of some form of the word *family*. Mathematically, our goal is to maximize:
 
-$$ p(w_o|w_i; \theta) = \frac{exp(w_o^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w_i^T\theta)}$$
+$$ p(w_o|w_i; \theta) = \frac{\mathcal{e}^{w_o^T\theta}}{ \displaystyle\sum_{i=0}^V \mathcal{e}^{w_i^T\theta}}$$
 
 for a given word, $w_j$. We have seen the value we wish to maximize for a single example. However, in terms of the entirety of our corpus, we wish to find the $\theta$ which maximizes:
 
@@ -126,7 +126,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3NjI0NTQ2Miw1NjY1NTE2MDAsMTIzND
-A1Njc2MCwxNTQ4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1
-MjEsMTIwODI1MTk3OCwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbLTE3NDEzMzg3MDgsNTY2NTUxNjAwLDEyMz
+QwNTY3NjAsMTU0ODU1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3
+NTIxLDEyMDgyNTE5NzgsMzgxMjU0ODA4XX0=
 -->
