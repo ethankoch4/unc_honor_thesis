@@ -81,7 +81,7 @@ $$ \{\big((w_{o-c},w_{o-c+1},\dots,w_{o-1}),\ w_o\big)\ |\ c\leq o\leq W\} $$
 
 In fact, one can even choose $w_o$ to be the word directly *before* the context. However, these variations do not really alter the results of the CBOW model. They are merely preferential {SOURCE}.
 
-These preferential choices notwithstanding, there are some improvements to the basic SG and CBOW models I have presented. Many of these improvements have the effect of making the model less computationally expensive to train and are therefore used in practice by software. Some improvements/variations include: negative sampling, . Stochastic Gradient Descent I will present f
+These preferential choices notwithstanding, there are some improvements/variations to the basic SG and CBOW models I have presented. Many of these improvements have the effect of making the model less computationally expensive to train and are therefore used in practice by software. Some improvements/variations include: negative sampling, . Stochastic Gradient Descent I will present f
 
 ## 1.4&nbsp;&nbsp;&nbsp;&nbsp;Training the Model: Stochastic Gradient Descent
 
@@ -127,7 +127,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNDI0MDE4NDUsLTEyNTk2MTE4Niw1Nj
+eyJoaXN0b3J5IjpbLTEzNDI5NzUwMzgsLTEyNTk2MTE4Niw1Nj
 Y1NTE2MDAsMTIzNDA1Njc2MCwxNTQ4NTUxMjAyLC0xOTQyNTY1
 MDk0LC05MDU0Nzc1MjEsMTIwODI1MTk3OCwzODEyNTQ4MDhdfQ
 ==
