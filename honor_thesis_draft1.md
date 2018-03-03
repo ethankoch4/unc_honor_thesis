@@ -78,9 +78,9 @@ The CBOW model is the one we chose to run on the SCOTUS corpus for performance r
 
 In order to give a firm understanding of the model I have presented CBOW as using the words on either side of a given word, $w_o$, to predict $w_o$ and thereby generate embeddings. However, often times CBOW, as well as other word embeddings models, will choose $w_o$ to the word directly *after* the context. The input-output pairs are then generated in the following way:
 
-$$ \{\big((w_{o-c},\dots,w_{o+c}),\ w_o\big)\ |\ 0\leq o\leq W,\  c \neq 0\} $$
+$$ \{\big((w_{o-c},\ w_{o-c},\dots,w_{o-1}),\ w_o\big)\ |\ 0\leq o\leq W,\  c \neq 0\} $$
 
-In fact, one can even choose $w_o$ to be the word directly *before* the context. However, these variations do not alter the results of the model.
+In fact, one can even choose $w_o$ to be the word directly *before* the context. However, these variations do not really alter the results of the CBOW model, they are merely preferential {SOURCE}.
 {HELP} {EXTEND THIS SECTION A BIT?}
 
 ## 1.4&nbsp;&nbsp;&nbsp;&nbsp;Training the Model: Stochastic Gradient Descent
@@ -127,7 +127,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU3MzU2NzIzOCw1NjY1NTE2MDAsMTIzND
+eyJoaXN0b3J5IjpbLTc4Mjc2NDcwMyw1NjY1NTE2MDAsMTIzND
 A1Njc2MCwxNTQ4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1
 MjEsMTIwODI1MTk3OCwzODEyNTQ4MDhdfQ==
 -->
