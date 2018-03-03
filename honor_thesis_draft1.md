@@ -70,7 +70,7 @@ This is significantly different than the traditional settings where the quantiti
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
 
 $$ \{\big((w_{o-c},\dots,w_{o+c}),\ w_o\big)\ |\ 0\leq o\leq W,\  c \neq 0\} $$
-One may notice in the Skip-Gram model the input-output pairs are both of the same dimension. This is not true of the CBOW model. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\mapsto$ to be a a concatenating or averaging function which then is multiplied  on a word-level the goal becomes to maximize:
+One may notice in the Skip-Gram model the input-output pairs are both of the same dimension. This is not true of the CBOW model. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\to \mathbb{R}$ to be a a concatenating or averaging function which then is multiplied  on a word-level the goal becomes to maximize:
 
 $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{exp\big(g(w_o)^T\theta\big)}{ \displaystyle\sum_{i=0}^V exp\big(g(w_i)^T\theta\big)}$$
 
@@ -89,7 +89,7 @@ $$\theta = \begin{bmatrix}
 			\vdots & \vdots & \ddots & \vdots \\
 			\theta_{V,0} & \theta_{V,1} & \dots &\theta_{V,s} \\
 			         \end{bmatrix},\ \theta_{i,j}\ chosen from \  \Theta $$ 
-         where $\Theta$ is some probability distribution, often $U[0,1]$ or $N(0,1)$. In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
+         where $\Theta$ is some probability distribution, often $U[0,1]$ or $\mathscr{N}(0,1)$. In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
 >2. Calculate the gradient of the loss function over the entirety of the training data set. The parameters, $\theta$, become itself mines the calculated gradient with a learning rate.
 >$$ \theta = \theta - \alpha \nabla_{\theta}L(\theta)$$
 >3. Repeat step 2 until some convergence rule is achieved. This typically is a set number of iterations or when the gradient becomes sufficiently small.
@@ -123,7 +123,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjY2NDM5ODEyLDEyMzQwNTY3NjAsMTU0OD
-U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
-NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbLTg0NTk5MTkwOSwxMjM0MDU2NzYwLDE1ND
+g1NTEyMDIsLTE5NDI1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUx
+OTc4LDM4MTI1NDgwOF19
 -->
