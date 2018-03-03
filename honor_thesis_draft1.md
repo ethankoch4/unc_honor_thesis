@@ -82,8 +82,8 @@ The CBOW model is the one we chose to run on the SCOTUS corpus for performance r
 In Word2Vec, Doc2Vec, and Node2Vec, Stochastic Gradient Descent (SGD) is the optimization method we used to tune the parameters of the model. SGD is a form of Gradient Descent that is defined by the following steps:
 >1. Choose initial parameters, typically randomly selected from a probability distribution:
 $$\theta = \begin{bmatrix}
-			\theta_{0,0},& \theta_{0,1}, &\dots, &\theta_{0,s} \\
-			\theta_{1,0},& \theta_{1,1}, &\dots, &\theta_{1,s} \\
+			\theta_{0,0} & \theta_{0,1} & \dots & \theta_{0,s} \\
+			\theta_{1,0} & \theta_{1,1} & \dots & \theta_{1,s} \\
 			\vdots & \ddots & \vdots \\
 				\theta_{V,0},&\dots &\theta_{V,s} \\
          \end{bmatrix},\ \theta_{i,j}\ chosen from \  \Theta $$ 
@@ -121,7 +121,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQxMzAwNjY0NCwxNTQ4NTUxMjAyLC0xOT
-QyNTY1MDk0LC05MDU0Nzc1MjEsMTIwODI1MTk3OCwzODEyNTQ4
-MDhdfQ==
+eyJoaXN0b3J5IjpbLTE0ODkwNTU2NjgsMTU0ODU1MTIwMiwtMT
+k0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5NzgsMzgxMjU0
+ODA4XX0=
 -->
