@@ -9,7 +9,7 @@ The Word2Vec algorithm was originally created by {SOURCE}. The algorithm has led
 
 ## 1.1&nbsp;&nbsp;&nbsp;&nbsp;Motivation
 
-The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $v_i \in \mathbb{R}^s$, the direction $s_j$ itself is most likely uninterpretable in and of itself. {HELP}: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity
+The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $v_j \in \mathbb{R}^s$, the direction $s_k$ itself is most likely uninterpretable in and of itself. {HELP}: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity
 
 Word2Vec is an embedding algorithm with the goal of generating a vector that corresponds to a given word. This algorithm is not only the basis for many other similar embedding algorithms, but also has applications sentiment analysis, topic detection, and other NLP-related tasks. The goal of running Word2Vec on the SCOTUS corpus is to generate embeddings for the words used in Supreme Court cases for comparison with the same words used in non-legal contexts, in this case the GoogleNews embeddings {HELP}{SOURCE}.
 
@@ -39,14 +39,14 @@ $$(Happy, families),\ (unhappy, family),$$$$(family , is),\ (families,are)$$
 
 With this in mind, we can think about the model embedding words that appear in similar contexts near to each other. The third and fourth pairs should push the model toward embedding *is* and *are* near each other because they both appear within the context of some form of the word *family*. Mathematically, our goal is to maximize:
 
-$$ p(w_o|w_i; \theta) = \frac{exp(w_j^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w_i^T\theta)}$$
+$$ p(w_o|w_i; \theta) = \frac{exp(w_o^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w_i^T\theta)}$$
 
 for a given word, $w_j$. We have seen the value we wish to maximize for a single example. However, in terms of the entirety of our corpus, we wish to find the $\theta$ which maximizes:
 
-$$ L(\theta) = \frac{1}{V} \displaystyle\sum_{i=0}^V \displaystyle\sum_{j = -c,\ j\neq 0}^c log\ p(w_j|w_i; \theta) $$
+$$ L(\theta) = \frac{1}{V} \displaystyle\sum_{i=0}^V \displaystyle\sum_{o = -c,\ o\neq 0}^c log\ p(w_o|w_i; \theta) $$
 
 
-In this setting, $w_j$ represents a vector of zeros with length $V$, where the $j^{th}$ entry is $1$.  I will also refer to it as the word it represents.
+In this setting, $w_o$ represents a vector of zeros with length $V$, where the $o^{th}$ entry is $1$.  I will also refer to it as the word it represents.
 
 $$w_j = \begin{bmatrix}
 				0 \\
@@ -123,7 +123,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMjg3NTA5NDgsMTIzNDA1Njc2MCwxNT
+eyJoaXN0b3J5IjpbLTE3NTMxNDQ2MDIsMTIzNDA1Njc2MCwxNT
 Q4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1MjEsMTIwODI1
 MTk3OCwzODEyNTQ4MDhdfQ==
 -->
