@@ -107,7 +107,7 @@ PV-DBOW is most similar to the Word2Vec Skip-Gram model.
 
 PV-DM is most similar to the Word2Vec CBOW model.
 
-# 3&nbsp;&nbsp;Intro to Node2Vec
+# 3&nbsp;&nbsp;&nbsp;&nbsp;Intro to Node2Vec
 
 blah blah blah
 
@@ -121,7 +121,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzNDA1Njc2MCwtMTEzNzkxMTA3NiwxNT
-Q4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1MjEsMTIwODI1
-MTk3OCwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbODQzMzA0NDMyLDEyMzQwNTY3NjAsMTU0OD
+U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
+NzgsMzgxMjU0ODA4XX0=
 -->
