@@ -68,7 +68,7 @@ This is significantly different than the traditional settings where the quantiti
 
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
 
-$$ \{\big((w_{o-c/2},\dots,w_{o+c/2}),\ w_o\big)\ |\ \frac{c}2\leq o\leq W-c,\  c \neq 0\} $$
+$$ \{\big((w_{o-\frac{c}{2}},\dots,w_{o+\frac{c}{2}}),\ w_o\big)\ |\ \frac{c}{2}\leq o\leq W-\frac{c}{2},\  c \neq 0\} $$
 One may notice in the Skip-Gram model the input-output pairs are both of the same dimension. This is not true of the CBOW model. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\to \mathbb{R}^V$ to be an element-wise averaging function (one can also define it as a concatenating function) so that on a word-level the goal becomes to maximize:
 
 $$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{\mathcal{e}^{\big(g(w_{o-j}^T\theta,\ \dots\ ,\ w_{o+j}^T\theta)\big)}}{ \displaystyle\sum_{i=0}^V \mathcal{e}^{\big(w_i^T\theta\big)}}$$
@@ -126,7 +126,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDE1ODM3NjQsNTY2NTUxNjAwLDEyMz
-QwNTY3NjAsMTU0ODU1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3
-NTIxLDEyMDgyNTE5NzgsMzgxMjU0ODA4XX0=
+eyJoaXN0b3J5IjpbMTA3NjI0NTQ2Miw1NjY1NTE2MDAsMTIzND
+A1Njc2MCwxNTQ4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1
+MjEsMTIwODI1MTk3OCwzODEyNTQ4MDhdfQ==
 -->
