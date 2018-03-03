@@ -87,7 +87,7 @@ $$\theta = \begin{bmatrix}
 				\theta_{V,0},&\dots &\theta_{V,s} \\
          \end{bmatrix}, \theta_{i,j}  $$  In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
 >2. Calculate the gradient of the loss function over the entirety of the training data set. The parameters, $\theta$, become itself mines the calculated gradient with a learning rate.
->$$ \theta = \theta - \alpha \nabla_{\theta}(L(\$$
+>$$ \theta = \theta - \alpha \nabla_{\theta}(L(\theta;)$$
 >3. Subtract 
 >θ = θ − η · ∇θJ(θ)
 
@@ -118,7 +118,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTQwMjYwMTIsMTU0ODU1MTIwMiwtMT
-k0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5NzgsMzgxMjU0
-ODA4XX0=
+eyJoaXN0b3J5IjpbMTQ4MjgzMTM4LDE1NDg1NTEyMDIsLTE5ND
+I1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUxOTc4LDM4MTI1NDgw
+OF19
 -->
