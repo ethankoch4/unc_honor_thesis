@@ -89,7 +89,7 @@ $$\theta = \begin{bmatrix}
 			\vdots & \vdots & \ddots & \vdots \\
 			\theta_{V,0} & \theta_{V,1} & \dots &\theta_{V,s} \\
 			         \end{bmatrix},\ \theta_{i,j}\ chosen from \  \Theta $$ 
-         where $\Theta$ is some probability distribution, often $U[0,1]$ or $\mathscr{N}(0,1)$. In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
+         where $\Theta$ is some probability distribution, often $\mathcal{U}[0,1]$ or $\mathcal{N}(0,1)$. In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
 >2. Calculate the gradient of the loss function over the entirety of the training data set. The parameters, $\theta$, become itself mines the calculated gradient with a learning rate.
 >$$ \theta = \theta - \alpha \nabla_{\theta}L(\theta)$$
 >3. Repeat step 2 until some convergence rule is achieved. This typically is a set number of iterations or when the gradient becomes sufficiently small.
@@ -123,7 +123,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg0NTk5MTkwOSwxMjM0MDU2NzYwLDE1ND
-g1NTEyMDIsLTE5NDI1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUx
-OTc4LDM4MTI1NDgwOF19
+eyJoaXN0b3J5IjpbMjM2OTc0MjY3LDEyMzQwNTY3NjAsMTU0OD
+U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
+NzgsMzgxMjU0ODA4XX0=
 -->
