@@ -48,7 +48,7 @@ $$ L(\theta) = \frac{1}{V} \displaystyle\sum_{i=0}^V \displaystyle\sum_{o = -c,\
 
 In this setting, $w_o$ represents a vector of zeros with length $V$, where the $o^{th}$ entry is $1$.  I will also refer to it as the word it represents.
 
-$$w_j = \begin{bmatrix}
+$$w_o = \begin{bmatrix}
 				0 \\
 				0 \\
 				\vdots \\
@@ -57,11 +57,11 @@ $$w_j = \begin{bmatrix}
 				0 \\
          \end{bmatrix} $$
 
-This is called *one-hot encoding* and serves to isolate only the row in the matrix of learned parameters, $\theta$, which correspond to that word, $w_j$. However, in practice one typically uses key/value pairs for efficiency.
+This is called *one-hot encoding* and serves to isolate only the row in the matrix of learned parameters, $\theta$, which correspond to that word, $w_o$. However, in practice one typically uses key/value pairs for efficiency.
 
-The actual embedding generated, $v_j$, which corresponds to word $w_j$, is exactly the row that is isolated by multiplying our *one-hot encoded* input vector with the weight matrix:
+The actual embedding generated, $v_o$, which corresponds to word $w_o$, is exactly the row that is isolated by multiplying our *one-hot encoded* input vector with the weight matrix:
 
-$$v_j = w_j^T \theta$$
+$$v_o = w_o^T \theta$$
 
 This is significantly different than the traditional settings where the quantities of interest are the output of a model, either predicted values or probabilities.
 
@@ -123,7 +123,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NTMxNDQ2MDIsMTIzNDA1Njc2MCwxNT
-Q4NTUxMjAyLC0xOTQyNTY1MDk0LC05MDU0Nzc1MjEsMTIwODI1
-MTk3OCwzODEyNTQ4MDhdfQ==
+eyJoaXN0b3J5IjpbNzI0MzY3NTE2LDEyMzQwNTY3NjAsMTU0OD
+U1MTIwMiwtMTk0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5
+NzgsMzgxMjU0ODA4XX0=
 -->
