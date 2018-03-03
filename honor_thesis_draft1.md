@@ -43,7 +43,7 @@ $$ p(w_o|w_i; \theta) = \frac{exp(w_o^T\theta)}{ \displaystyle\sum_{i=0}^V exp(w
 
 for a given word, $w_o$. We have seen the value we wish to maximize for a single example. However, in terms of the entirety of our corpus, we wish to find the $\theta$ which maximizes:
 
-$$ \frac{1}{V} \displaystyle\sum_{i=0}^V \displaystyle\sum_{j = -c,\ j\neq 0}^c log\ p(w_o|w_i; \theta) $$
+$$ L(\theta) = \frac{1}{V} \displaystyle\sum_{i=0}^V \displaystyle\sum_{j = -c,\ j\neq 0}^c log\ p(w_o|w_i; \theta) $$
 
 
 In this setting, $w_o$ represents a vector of zeros with length $V$, where the $o^{th}$ entry is $1$.  I will also refer to it as the word it represents.
@@ -88,7 +88,7 @@ $$\theta = \begin{bmatrix}
          \end{bmatrix},\ \theta_{i,j}\ chosen from \  U[0,1] $$ 
          In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
 >2. Calculate the gradient of the loss function over the entirety of the training data set. The parameters, $\theta$, become itself mines the calculated gradient with a learning rate.
->$$ \theta = \theta - \alpha \nabla_{\theta}(L(\theta|X,Y)$$
+>$$ \theta = \theta - \alpha \nabla_{\theta}(L(\theta)$$
 >3. Repeat step 2 until some convergence rule is achieved. This typically is a set number of iterations or when the gradient becomes sufficiently small.
 
 The first step in SGD is to choose a starting point for the parameters. Typically, 
@@ -118,7 +118,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNTI2MTU2MDgsMTU0ODU1MTIwMiwtMT
-k0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5NzgsMzgxMjU0
-ODA4XX0=
+eyJoaXN0b3J5IjpbLTQ5NjQzMDk3NywxNTQ4NTUxMjAyLC0xOT
+QyNTY1MDk0LC05MDU0Nzc1MjEsMTIwODI1MTk3OCwzODEyNTQ4
+MDhdfQ==
 -->
