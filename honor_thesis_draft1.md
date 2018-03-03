@@ -89,7 +89,7 @@ $$\theta = \begin{bmatrix}
          In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
 >2. Calculate the gradient of the loss function over the entirety of the training data set. The parameters, $\theta$, become itself mines the calculated gradient with a learning rate.
 >$$ \theta = \theta - \alpha \nabla_{\theta}(L(\theta|X,Y)$$
->3. Repeat step 2 until some convergence rule is achieved. This typically is a set number of 
+>3. Repeat step 2 until some convergence rule is achieved. This typically is a set number of iterations 
 
 The first step in SGD is to choose a starting point for the parameters. Typically, 
 # 2&nbsp;&nbsp;&nbsp;&nbsp;Intro to Doc2Vec
@@ -118,7 +118,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NjQ3NTUwMzIsMTU0ODU1MTIwMiwtMT
+eyJoaXN0b3J5IjpbLTE1OTM1Njk5NjAsMTU0ODU1MTIwMiwtMT
 k0MjU2NTA5NCwtOTA1NDc3NTIxLDEyMDgyNTE5NzgsMzgxMjU0
 ODA4XX0=
 -->
