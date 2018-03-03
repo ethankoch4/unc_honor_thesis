@@ -106,7 +106,7 @@ PV-DBOW is most similar to the Word2Vec Skip-Gram model.
 
 ## 2.2&nbsp;&nbsp;&nbsp;&nbsp;Paragraph Vector - Distributed Memory (DM)
 
-PV-DM is most similar to the Word2Vec CBOW model.
+PV-DM is most similar to the Word2Vec CBOW model. Recall that in CBOW the word vectors are learned by the process of predicting 
 
 # 3&nbsp;&nbsp;&nbsp;&nbsp;Intro to Node2Vec
 
@@ -122,7 +122,7 @@ blah blah blah
 
 # SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5MzQ3NDk0OCwxMjM0MDU2NzYwLDE1ND
+eyJoaXN0b3J5IjpbLTc4MzkyNzYxNSwxMjM0MDU2NzYwLDE1ND
 g1NTEyMDIsLTE5NDI1NjUwOTQsLTkwNTQ3NzUyMSwxMjA4MjUx
 OTc4LDM4MTI1NDgwOF19
 -->
