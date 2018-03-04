@@ -14,7 +14,7 @@ def main():
 
     G, issue_areas = load_scotus_network(file_path="../data/scotus_network.graphml")
 
-    nodes = np.random.permutation([n for n in G.nodes])
+    nodes = np.random.permutation([n for n in G.nodes()])
     del G
     del issue_areas
 

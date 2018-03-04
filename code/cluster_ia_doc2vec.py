@@ -13,12 +13,12 @@ def main():
 
     IA = 15
     
-    nodes = np.random.permutation([n for n in G.nodes])
+    nodes = np.random.permutation([n for n in G.nodes()])
 
     ia_to_name = {i : [] for i in range(IA)}
     name_to_ia = {}
-    for n in nodes:
-        ia = int(float(G.nodes[n]['issueArea']))
+    for n,d in G.nodes_iter(data=True):
+        ia = int(float(d['issueArea']))
         ia_to_name[ia].append(n)
         name_to_ia[n] = ia
 

@@ -19,7 +19,7 @@ do
     OUT_NAME+=".log"
     JOB_NAME="non_ia_d2v"
     JOB_NAME+="$var"
-    sbatch -o OUT_NAME -t 3-12 --job-name=JOB_NAME --mem=16384 --wrap="$COMMAND"
+    sbatch -o "$OUT_NAME" -t 3-12 --job-name="$JOB_NAME" --mem=16384 --wrap="$COMMAND"
     var=$(($var-$step))
 done
 echo "COMPLETED cluster non issueArea PYTHON SCRIPT"
