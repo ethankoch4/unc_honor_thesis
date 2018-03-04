@@ -91,51 +91,60 @@ class doc2vec(object):
                 documents.append(readfile.read())
         return names, documents
 
-    def kmeans_evaluate(self, embeddings, labels=[], n_clusters=2):
+    def kmeans_evaluate(self, embeddings, node_ids=[], n_clusters=2):
         from sklearn.cluster import KMeans
-        from utilities import score_bhamidi
-        from utilities import score_purity
-        from utilities import score_agreement
 
-        if not labels == []:
+        if not node_ids == []:
             walks_data = embeddings.docvecs
-            walks_data = [walks_data[i] for i in range(len(labels))]
+            walks = []
+            for node_id in node_ids:
+                walks.append(walks_data[node_id])
+            del walks_data
 
-            kmeans = KMeans(n_clusters=n_clusters).fit(walks_data)
+            kmeans = KMeans(n_clusters=n_clusters).fit(walks)
             return kmeans
             
-
-    def hierarchical_evaluate(self, embeddings, labels=[], n_clusters=2):
+    def hierarchical_evaluate(self, embeddings, node_ids=[], n_clusters=2):
         from sklearn.cluster import AgglomerativeClustering
-        from utilities import score_bhamidi
-        from utilities import score_purity
-        from utilities import score_agreement
 
-        if not labels == []:
+        if not node_ids == []:
             walks_data = embeddings.docvecs
-            walks_data = [walks_data[i] for i in range(len(labels))]
+            walks = []
+            for node_id in node_ids:
+                walks.append(walks_data[node_id])
+                print(walks_data[node_id])
+            del walks_data
 
             agglomerative = AgglomerativeClustering(n_clusters=n_clusters,
                                                     affinity='cosine',
                                                     linkage='average'
-                                                    ).fit(walks_data)
+                                                    ).fit(walks)
             return agglomerative
 
-
-    def run_clustering(self, n_clusters=2,labels=[],evaluate=True):
-        self.kmeans = kmeans_evaluate(self.model,labels=labels,n_clusters=n_clusters)
-        self.hierarchical = hierarchical_evaluate(self.model,labels=labels,n_clusters=n_clusters)
+    def run_clustering(self, n_clusters=2, labels_dict={}, evaluate=True):
+        from utilities import score_bhamidi
+        from utilities import score_purity
+        from utilities import score_agreement
+        node_ids = []
+        labels = []
+        for node_id in list(labels_dict.keys()):
+            node_ids.append(node_id)
+            labels.append(labels_dict[node_id])
+        self.kmeans = self.kmeans_evaluate(self.model,node_ids=node_ids,n_clusters=n_clusters)
+        self.hierarchical = self.hierarchical_evaluate(self.model,node_ids=node_ids,n_clusters=n_clusters)
+        print('actual labels: ',list(labels))
+        print('kmeans labels: ',list(self.kmeans.labels_))
+        print('hierarchical labels: ',list(self.hierarchical.labels_))
         if evaluate:
-            self.bhamidi_score_hierarchical = score_bhamidi(labels, list(agglomerative.labels_))
-            self.purity_score_hierarchical = score_purity(labels, list(agglomerative.labels_))
-            self.agreement_score_hierarchical = score_agreement(labels, list(agglomerative.labels_))
-            self.bhamidi_score_kmeans = score_bhamidi(labels, list(kmeans.labels_))
-            self.purity_score_kmeans = score_purity(labels, list(kmeans.labels_))
-            self.agreement_score_kmeans = score_agreement(labels, list(kmeans.labels_))
-            self.kmeans_hierarchical_bhamidi = score_bhamidi(list(agglomerative.labels_), list(kmeans.labels_))
-            self.kmeans_hierarchical_purity = score_purity(list(agglomerative.labels_), list(kmeans.labels_))
-            self.kmeans_hierarchical_agreement = score_agreement(list(agglomerative.labels_), list(kmeans.labels_))
-
+            self.bhamidi_score_hierarchical = score_bhamidi(labels, list(self.hierarchical.labels_))
+            self.purity_score_hierarchical = score_purity(labels, list(self.hierarchical.labels_))
+            self.agreement_score_hierarchical = score_agreement(labels, list(self.hierarchical.labels_))
+            self.bhamidi_score_kmeans = score_bhamidi(labels, list(self.kmeans.labels_))
+            self.purity_score_kmeans = score_purity(labels, list(self.kmeans.labels_))
+            self.agreement_score_kmeans = score_agreement(labels, list(self.kmeans.labels_))
+            self.kmeans_hierarchical_bhamidi = score_bhamidi(list(self.hierarchical.labels_), list(self.kmeans.labels_))
+            self.kmeans_hierarchical_purity = score_purity(list(self.hierarchical.labels_), list(self.kmeans.labels_))
+            self.kmeans_hierarchical_agreement = score_agreement(list(self.hierarchical.labels_), list(self.kmeans.labels_))
 
 
     def similarity_time_plot(self,case,name_to_year={},fig_size=(30,15),num_to_plot=27884,outname="ERROR",show=False):

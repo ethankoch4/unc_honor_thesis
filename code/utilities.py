@@ -203,7 +203,7 @@ def score_purity(memberships, predicted_memberships):
     #make a set for each possible label
     true_label_sets = {}
     predicted_label_sets = {}
-    for label in true_labels:
+    for label in true_labels.union(predicted_labels):
         true_label_sets[label] = set()
         predicted_label_sets[label] = set()
     
