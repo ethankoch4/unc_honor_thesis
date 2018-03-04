@@ -261,7 +261,7 @@ def create_relabelings(y):
     output variable
     relabeling - possible relabelings of y
     '''
-    lookups = list(set(itertools.permutations(set(y))))
+    lookups = itertools.permutations(set(y))
     relabelings = []
     for lookup in lookups:
         lookup = np.array(lookup)
@@ -434,13 +434,19 @@ def iterate_out_of_class_probs(start = 30,
     print("Time elapsed while running 'iterate_out_of_class_probs' function: {0}".format(round(time.clock()-start_time,8)))
     return bhamidi_scores_plot, bhamidi_medians, purity_scores_plot, purity_medians, agreement_scores_plot, agreement_medians, out_class_probs
 
-def save_current_status(file_name = 'current_status',**kwargs):
+def save_current_status(file_name='current_status',**kwargs):
     # saving current status
-    kwargs.pop('file_name')
+    if 'file_name' in set(kwargs.keys()):
+        kwargs.pop('file_name')
     # save to file (as json, obviously)
-    with open(file_name+'.json', 'w') as fp:
-        json.dump(current_status, fp)
-    return current_status
+    if '.json' not in file_name:
+        file_name += '.json'
+    if '../data/' not in file_name:
+        file_name = '../data/' + file_name
+    os.makedirs(os.path.dirname(file_name), exist_ok=True)
+    with open(file_name, 'w') as fp:
+        json.dump(kwargs, fp)
+    return kwargs
 
 def plot_save_scores(out_class_probs=[],
                      bhamidi_scores_plot=None,

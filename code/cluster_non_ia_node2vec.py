@@ -1,0 +1,28 @@
+def main():
+    from gensim import models
+    import numpy as np
+    import sys
+
+    from node2vec.node2vec import node2vec
+    from utilities import load_scotus_network
+    from utilities import get_name_to_date
+    from utilities import get_list_of_docs
+    p = float(sys.argv[1])
+    q = float(sys.argv[2])
+    print('n_clusters equals: {0}'.format(sys.argv[3]))
+
+    n2v_model = node2vec(model=models.Word2Vec.load("../data/tmp_scotus_n2v_{0}_{1}.node2vec".format(p,q)),label_docs=False)
+    n2v_model.p = p
+    n2v_model.q = q
+    G, issue_areas = load_scotus_network(file_path="../data/scotus_network.graphml")
+
+    nodes = np.random.permutation([n for n in G.nodes])
+    del G
+    del issue_areas
+
+    n2v_model.run_clustering(n_clusters=int(float(sys.argv[1])),nodes=nodes,evaluate=False)
+
+
+print('BEGINNING CLUSTERING WITH NODE2VEC.')
+main()
+print('FINISHED CLUSTERING WITH NODE2VEC.')
