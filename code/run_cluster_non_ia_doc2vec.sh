@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "RUNNING cluster non issueArea PYTHON SCRIPT STARTING WITH N_CLUSTERS:"
+module add python/3.5.1
 var=$1
 echo "$1"
 echo "AND ENDING AT:"
@@ -19,7 +20,7 @@ do
     OUT_NAME+=".log"
     JOB_NAME="non_ia_d2v"
     JOB_NAME+="$var"
-    sbatch -o "$OUT_NAME" -t 3-12 --job-name="$JOB_NAME" --mem=16384 --wrap="$COMMAND"
+    sbatch -o "$OUT_NAME" -t 2-12 --job-name="$JOB_NAME" --mem=32768 --wrap="$COMMAND"
     var=$(($var-$step))
 done
 echo "COMPLETED cluster non issueArea PYTHON SCRIPT"
