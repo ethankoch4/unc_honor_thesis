@@ -139,6 +139,7 @@ class doc2vec(object):
             node_ids = nodes
         node_ids = [str(n_id) for n_id in node_ids]
         labels = [int(l) for l in labels]
+        print('Starting clustering.')
         self.kmeans = self.kmeans_evaluate(self.model,node_ids=node_ids,n_clusters=n_clusters)
         self.hierarchical = self.hierarchical_evaluate(self.model,node_ids=node_ids,n_clusters=n_clusters)
         self.kmeans_labels = [int(lab) for lab in self.kmeans.labels_]
@@ -146,7 +147,7 @@ class doc2vec(object):
         file_name = "ia_doc2vec_clustering"
         if labels_dict == {}:
             file_name = str(n_clusters) + '_non_' + file_name
-
+        print('Finished clustering. Saving data.')
         save_current_status(file_name=file_name,
                             n_clusters=n_clusters,
                             true_labels=labels,
@@ -180,15 +181,26 @@ class doc2vec(object):
         pickle.dump(self.kmeans, open(kmeans_file, 'wb'))
         pickle.dump(self.hierarchical, open(hierarchical_file, 'wb'))
         if evaluate:
+            print('Finished saving. Evaluating now.')
             self.bhamidi_score_hierarchical = score_bhamidi(labels, self.hierarchical_labels)
+            print('Finished: score_bhamidi(labels, self.hierarchical_labels)')
             self.purity_score_hierarchical = score_purity(labels, self.hierarchical_labels)
+            print('Finished: score_purity(labels, self.hierarchical_labels)')
             self.agreement_score_hierarchical = score_agreement(labels, self.hierarchical_labels)
+            print('Finished: score_agreement(labels, self.hierarchical_labels)')
             self.bhamidi_score_kmeans = score_bhamidi(labels, self.kmeans_labels)
+            print('Finished: score_bhamidi(labels, self.kmeans_labels)')
             self.purity_score_kmeans = score_purity(labels, self.kmeans_labels)
+            print('Finished: score_purity(labels, self.kmeans_labels)')
             self.agreement_score_kmeans = score_agreement(labels, self.kmeans_labels)
+            print('Finished: score_agreement(labels, self.kmeans_labels)')
             self.kmeans_hierarchical_bhamidi = score_bhamidi(self.hierarchical_labels, self.kmeans_labels)
+            print('Finished: score_bhamidi(self.hierarchical_labels, self.kmeans_labels)')
             self.kmeans_hierarchical_purity = score_purity(self.hierarchical_labels, self.kmeans_labels)
+            print('Finished: score_purity(self.hierarchical_labels, self.kmeans_labels)')
             self.kmeans_hierarchical_agreement = score_agreement(self.hierarchical_labels, self.kmeans_labels)
+            print('Finished: score_agreement(self.hierarchical_labels, self.kmeans_labels)')
+            print('Finished evaluating. Saving now, then exiting.')
 
             save_current_status(file_name="doc2vec_clustering_evaluated",
                                 n_clusters=n_clusters,
