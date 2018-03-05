@@ -137,10 +137,12 @@ class doc2vec(object):
                 labels.append(int(labels_dict[node_id]))
         else:
             node_ids = nodes
+        node_ids = [str(n_id) for n_id in node_ids]
+        labels = [int(l) for l in labels]
         self.kmeans = self.kmeans_evaluate(self.model,node_ids=node_ids,n_clusters=n_clusters)
         self.hierarchical = self.hierarchical_evaluate(self.model,node_ids=node_ids,n_clusters=n_clusters)
-        self.kmeans_labels = list(map(int,list(self.kmeans.labels_)))
-        self.hierarchical_labels = list(map(int,list(self.hierarchical.labels_)))
+        self.kmeans_labels = [int(lab) for lab in self.kmeans.labels_]
+        self.hierarchical_labels = [int(lab) for lab in self.hierarchical.labels_]
         file_name = "ia_doc2vec_clustering"
         if labels_dict == {}:
             file_name = str(n_clusters) + '_non_' + file_name
@@ -178,12 +180,12 @@ class doc2vec(object):
         pickle.dump(self.kmeans, open(kmeans_file, 'wb'))
         pickle.dump(self.hierarchical, open(hierarchical_file, 'wb'))
         if evaluate:
-            self.bhamidi_score_hierarchical = score_bhamidi(labels, self.hierarchical_labels_)
-            self.purity_score_hierarchical = score_purity(labels, self.hierarchical_labels_)
-            self.agreement_score_hierarchical = score_agreement(labels, self.hierarchical_labels_)
+            self.bhamidi_score_hierarchical = score_bhamidi(labels, self.hierarchical_labels)
+            self.purity_score_hierarchical = score_purity(labels, self.hierarchical_labels)
+            self.agreement_score_hierarchical = score_agreement(labels, self.hierarchical_labels)
             self.bhamidi_score_kmeans = score_bhamidi(labels, self.kmeans_labels)
-            self.purity_score_kmeans = score_purity(labels, self.kmeans_labels_)
-            self.agreement_score_kmeans = score_agreement(labels, self.kmeans_labels_)
+            self.purity_score_kmeans = score_purity(labels, self.kmeans_labels)
+            self.agreement_score_kmeans = score_agreement(labels, self.kmeans_labels)
             self.kmeans_hierarchical_bhamidi = score_bhamidi(self.hierarchical_labels, self.kmeans_labels)
             self.kmeans_hierarchical_purity = score_purity(self.hierarchical_labels, self.kmeans_labels)
             self.kmeans_hierarchical_agreement = score_agreement(self.hierarchical_labels, self.kmeans_labels)
