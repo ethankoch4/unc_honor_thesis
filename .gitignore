@@ -4,9 +4,10 @@ __pycache__/
 *$py.class
 
 # custom ignores
-*data/local/
-*data/scotus/
-*plots/local/
+data/local/
+data/scotus/
+plots/local/
+plots/similarity_plots/
 *.doc2vec*
 
 # C extensions
