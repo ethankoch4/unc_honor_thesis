@@ -176,7 +176,7 @@ def score_bhamidi(memberships, predicted_memberships):
             predicted_match = predicted_memberships[i]==predicted_memberships[j] 
             if actual_match == predicted_match:
                 score += 1
-    #convert to percent of total vertex pairs
+    # convert to percent of total vertex pairs
     score = score/(vertex_count*vertex_count)
     return score
 
@@ -200,21 +200,21 @@ def score_purity(memberships, predicted_memberships):
     true_labels = set(memberships)
     predicted_labels = set(predicted_memberships)
     
-    #make a set for each possible label
+    # make a set for each possible label
     true_label_sets = {}
     predicted_label_sets = {}
     for label in true_labels.union(predicted_labels):
         true_label_sets[label] = set()
         predicted_label_sets[label] = set()
     
-    #go through each vertex and assign it to a set based on label
+    # go through each vertex and assign it to a set based on label
     for i in range(num_nodes):
         true_label = memberships[i]
         predicted_label = predicted_memberships[i]
         true_label_sets[true_label].add(i)
         predicted_label_sets[predicted_label].add(i)
         
-    #now can perfrom purity algorithm
+    # now can perfrom purity algorithm
     score = 0
     for true_label, true_label_set in true_label_sets.items():
         max_intersection = 0
@@ -224,8 +224,8 @@ def score_purity(memberships, predicted_memberships):
                 max_intersection = intersection
         score += max_intersection
 
-    #divide score by total vertex count
-    score = score/num_nodes
+    # divide score by total vertex count
+    score =  score / num_nodes
     return score
 
 def score_agreement(y, y_hat):
@@ -238,10 +238,16 @@ def score_agreement(y, y_hat):
     output variable
     score - agreement score
     '''
-    max_score = 0
-    relabelings = create_relabelings(y_hat)
-    y = np.array(y)
-    return max([np.sum(y == relabeling)/len(y) for relabeling in relabelings])
+    max_score = 0.0
+    lookups = itertools.permutations(set(y))
+    for lookup in lookups:
+        lookup = np.array(lookup)
+        relabeling = np.array(lookup[y])
+        score = float(np.sum(y == relabeling) / len(y))
+        # record if the largest so far
+        if score > max_score:
+            max_score = score
+    return max_score
 
 def score_auc(x,y):
     '''
@@ -250,23 +256,6 @@ def score_auc(x,y):
     y - vector of y values
     '''
     return np.trapz(y,x=x)
-
-def create_relabelings(y):
-    '''
-    calculates possible of permutations of labels of predicted labels of verticies
-    i.e. maintain community association within vector but changes the label values
-
-    input variables
-    y - relabelings of vertices
-    output variable
-    relabeling - possible relabelings of y
-    '''
-    lookups = itertools.permutations(set(y))
-    relabelings = []
-    for lookup in lookups:
-        lookup = np.array(lookup)
-        relabelings.append(np.array(lookup[y]))
-    return relabelings
 
 def make_block_probs(in_class_prob=0.5, out_class_prob=0.5):
     return np.array([[in_class_prob, out_class_prob],
