@@ -1,4 +1,5 @@
 #!/bin/bash
+module add python/3.5.1
 echo "SUBMITTING NODE2VEC JOB WITH ARGS"
 echo "$@"
 p=$1
@@ -13,5 +14,5 @@ LOG+="_"
 LOG+="$q"
 NAME="$LOG"
 LOG+=".log"
-sbatch -t 9-12 -o "$LOG" -N 1 --job-name="$NAME" --mem=98304 --wrap="$COMMAND"
+sbatch -t 10-12 -o "$LOG" -N 1 --job-name="$NAME" --mem=150000 --wrap="$COMMAND"
 echo "FINISHED"
