@@ -19,14 +19,14 @@ def main():
     n2v = node2vec(G=G,
                    p=float(sys.argv[1]),
                    q=float(sys.argv[1]),
-                   walk_length=650,
-                   num_walks=650,
+                   walk_length=150,
+                   num_walks=150,
                    window_size=10,
                    embedding_size=300,
                    num_iter=100,
                    min_count=0,
                    sg=1,
-                   workers=24)
+                   workers=12)
 
     model = n2v.run_node2vec()
     model.save('../data/scotus_n2v_{0}_{1}.node2vec'.format(sys.argv[1],sys.argv[2]))
