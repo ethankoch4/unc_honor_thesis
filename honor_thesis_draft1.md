@@ -1,17 +1,26 @@
+---
+output:
+    pdf_document
+---
 
-## <center>Abstract</center>
-why must this be here....
-:  asdlfkjalsdj asdf asd asd  omo o, om om okmomk omokmok mmo om okm om om
+# Abstract
 
-# 1&nbsp;&nbsp;&nbsp;&nbsp;Intro to Word2Vec
+why must this be here....asdlfkjalsdj asdf asd asd  omo o, om om okmomk omokmok mmo om okm om om
 
-The Word2Vec algorithm was originally created by {SOURCE}. The algorithm has led to many advances in fields such as Statistics, Natural Language Processing (NLP), {HELP} due to its drastic improvement over the previous state-of-the-art methods in retaining the meaning of each word in a corpus. Benefits of the use of the Word2Vec algorithm include: the dimensionality of embeddings is significantly less than the number of documents $D$ for any reasonably sized corpus, the embeddings are dense as opposed to sparse in the case of TF-IDF, the results of the algorithm {HELP}. It is also important to note that while Word2Vec has many different architectural choices and variations, the ones focused on in the theory portion of this paper will be those that offer the core intuition underlying the algorithm and are most widely used.
+# 1&nbsp;&nbsp;&nbsp;&nbsp;Intro to Word2Vec, Doc2Vec, and Node2Vec
 
-## 1.1&nbsp;&nbsp;&nbsp;&nbsp;Motivation
+## 1.1&nbsp;&nbsp;&nbsp;&nbsp;Intro to Word2Vec
 
-The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $v_j \in \mathbb{R}^s$, the direction $s_k$ itself is most likely uninterpretable in and of itself. {HELP}: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity
+The Word2Vec algorithm was originally created by [{SOURCE]}. The algorithm has led to many advances in fields such as Statistics, Natural Language Processing (NLP), [{HELP]} due to its drastic improvement over the previous state-of-the-art methods in retaining the meaning of each word in a corpus. Benefits of the use of the Word2Vec algorithm include: the dimensionality of embeddings is significantly less than the number of documents $D$ for any reasonably sized corpus, the embeddings are dense as opposed to sparse in the case of TF-IDF, the results of the algorithm [{HELP].
+ }. It is also important to note that while Word2Vec has many different architectural choices and variations, the ones focused on in the theory portion of this paper will be those that offer the core intuition underlying the algorithm and are most widely used.
+
+### 1.1.1&nbsp;&nbsp;&nbsp;&nbsp;Motivation
+
+The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $w_iv_j \in \mathbb{R}^ks$, the direction $k_js_k$ itself is most likely uninterpretable in and of itself. [{HELP}: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity]
 
 Word2Vec is an embedding algorithm with the goal of generating a vector that corresponds to a given word. This algorithm is not only the basis for many other similar embedding algorithms, but also has applications sentiment analysis, topic detection, and other NLP-related tasks. The goal of running Word2Vec on the SCOTUS corpus is to generate embeddings for the words used in Supreme Court cases for comparison with the same words used in non-legal contexts, in this case the GoogleNews embeddings {HELP}{SOURCE}.
+
+### 1.1.2&nbsp;&nbsp;&nbsp;&nbsp;Skip-gram Architecture
 
 ## 1.2&nbsp;&nbsp;&nbsp;&nbsp;Brief Overview of Previous Models
 
@@ -27,23 +36,24 @@ blah blah blah blah
 
 The skip-gram model takes a word as its input and has a goal of predicting the words around it during training. The skip-gram model was first introduced by {SOURCE}. In an effort to illustrate how this model works, let us use the following text as an example document:
 
-$$"Happy\ families\ are\ all\ alike;\ every\ unhappy\ family\ is\ unhappy\ in\ its\ own\ way."$$
+$$ Happy\ families\ are\ all\ alike;\ every\ unhappy\ family\ is\ unhappy\ in\ its\ own\ way $$
 
 This is the first line of *Anna Karenina* by Leo Tolstoy. Given a document of text, we generate these input-output pairs by first specifying $c$, the size of the context or window. The set of observations in the skip-gram model is then:
 
-$$ \{(w_i,\ w_{o})\ |\ 0\leq i\leq W-1,\ -c +i\leq o \leq c+i,\ o\neq 0\} $$
+$$ \big\{(w_oi,\ w_{o-j})\ \big|\ 0\leq oi\leq W-1,\ -c +i\leq jo \leq c+i,\ jo\neq 0\big\} $$
 
 Where $W$ is the number of words in our corpus. Similarly, we define $V$ as the number of *unique* words in our corpus. Now, if we specify $c$ to be 2 in our example, then some of the input-output pairs would be:
 
-$$(Happy, families),\ (unhappy, family),$$$$(family , is),\ (families,are)$$
+$$ (Happy,\ families),\ (unhappy,\ family), $$
+$$ (family,\ is),\ (families,\ are) $$
 
 With this in mind, we can think about the model embedding words that appear in similar contexts near to each other. The third and fourth pairs should push the model toward embedding *is* and *are* near each other because they both appear within the context of some form of the word *family*. Mathematically, our goal is to maximize:
 
-$$ p(w_o|w_i; \theta) = \frac{\mathcal{e}^{w_o^T\theta}}{ \displaystyle\sum_{i=0}^V \mathcal{e}^{w_i^T\theta}}$$
+$$ p(w_o\big|w_i; \theta) = \frac{e^{\big(w_0^T\theta\big)}}{\displaystyle\sum_{i=0}^V e^{\big(w_i^T\theta\big)}} $$
 
-for a given word, $w_j$. We have seen the value we wish to maximize for a single example. However, in terms of the entirety of our corpus, we wish to find the $\theta$ which maximizes:
+for a given word, $w_oj$. We have seen the value we wish to maximize for a single example. However, in terms of the entirety of our corpus, we wish to find the $\theta$ which maximizes:
 
-$$ L(\theta) = \frac{1}{V} \displaystyle\sum_{i=0}^V \displaystyle\sum_{o = -c,\ o\neq 0}^c log\ p(w_o|w_i; \theta) $$
+$$ L(\theta) = \frac{1}{V} \displaystyle\sum_{i=0}^V \displaystyle\sum_{o = -c,\ o\neq 0}^c log\ p(w_o\big|w_i; \theta) $$
 
 In this setting, $w_o$ represents a vector of zeros with length $V$, where the $o^{th}$ entry is $1$.  I will also refer to it as the word it represents.
 
@@ -56,11 +66,13 @@ $$w_o = \begin{bmatrix}
 				0 \\
          \end{bmatrix} $$
 
-This is called *one-hot encoding* and serves to isolate only the row in the matrix of learned parameters, $\theta$, which correspond to that word, $w_o$. However, in practice one typically uses key/value pairs for efficiency.
+This is called *one-hot encoding* and serves to isolate only the row in the matrix of learned parameters, $\theta$, which correspond to that word, $w_o$. 
+
+We have seen the value we wish to maximize for a single example. However, in terms of the entirety of our corpus, we wish to find the $\theta$ whichHowever, in practice one typically uses key/value pairs for efficiency.
 
 The actual embedding generated, $v_o$, which corresponds to word $w_o$, is exactly the row that is isolated by multiplying our *one-hot encoded* input vector with the weight matrix:
 
-$$v_o = w_o^T \theta$$
+$$ v_o = w_o^T \theta $$
 
 This is significantly different than the traditional settings where the quantities of interest are the output of a model, either predicted values or probabilities.
 
@@ -68,16 +80,21 @@ This is significantly different than the traditional settings where the quantiti
 
 The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the skip-gram, though it achieves the same end goal of creating embeddings for the words in a corpus. In the CBOW model, the input-output pairs are generated as follows:
 
-$$ \{\big((w_{o-\frac{c}{2}},\dots,w_{o+\frac{c}{2}}),\ w_o\big)\ |\ \frac{c}{2}\leq o\leq W-\frac{c}{2},\  c \neq 0\} $$
-One may notice in the Skip-Gram model the input-output pairs are both of the same dimension. This is not true of the CBOW model. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\to \mathbb{R}^V$ to be an element-wise averaging function (one can also define it as a concatenating function) so that on a word-level the goal becomes to maximize:
+$$ \big\{\big((w_{o-\frac{c}{2}},\dots,w_{o+\frac{c}{2}}),\ w_o\big)\ \big|\ \frac{c}{2}\leq o\leq W-\frac{c}{2},\  c \neq 0\big\} $$
 
-$$ p(w_o|w_{o-j},\dots,w_{o+j}; \theta) = \frac{\mathcal{e}^{\big(g(w_{o-j}^T\theta,\ \dots\ ,\ w_{o+j}^T\theta)\big)}}{ \displaystyle\sum_{i=0}^V \mathcal{e}^{\big(w_i^T\theta\big)}}$$
+# ADD ANNA KARENINA EXAMPLE TO THIS SECTION!!
+
+One may notice in the Skip-Gram model the input-output pairs are both of the same dimension. This is not true of the CBOW model. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\to \mathbb{R}^V$ to be an element-wise averaging function (one can also define it as a concatenating function) so that on a word-level the goal becomes to maximizes:
+
+$$ p(w_o\big|w_{o-j},\dots,w_{o+j}; \theta) = \frac{e^{\big(g(w_{o-j}^T\theta,\ \dots\ ,\ w_{o+j}^T\theta)\big)}}{ \displaystyle\sum_{i=0}^V e^{\big(w_i^T\theta\big)}} $$
 
 The CBOW model is the one we chose to run on the SCOTUS corpus for performance reasons. Which architecture of the many provides the best results is still an open question {SOURCE}.
 
-In order to give a firm understanding of the model I have presented CBOW as using the words on either side of a given word, $w_o$, to predict $w_o$ and thereby generate embeddings. However, often times CBOW, as well as other word embeddings models, will choose $w_o$ to the word directly *after* the context. The input-output pairs are then generated in the following way:
+In order to give a firm understanding of the model I have presented CBOW as using the words on either side of a given word, $w_o$, to predict $w_o$ and thereby generate embeddings. However, one can alter CBOW, as well as other word embeddings models, to define $w_o$ as the word directly *after* the context. The input-output pairs are then generated in the following way:
 
-$$ \{\big((w_{o-c},w_{o-c+1},\dots,w_{o-1}),\ w_o\big)\ |\ c\leq o\leq W\} $$
+$$ \big\{\big((w_{o-c},w_{o-c+1},\dots,w_{o-1}),\ w_o\big)\ \big|\ c\leq o\leq W\big\} $$
+
+
 
 In fact, one can even choose $w_o$ to be the word directly *before* the context. However, these variations do not really alter the results of the CBOW model. They are merely preferential {SOURCE}.
 
@@ -86,7 +103,8 @@ These preferential choices notwithstanding, there are some architectural options
 ## 1.4&nbsp;&nbsp;&nbsp;&nbsp;Training the Model: Stochastic Gradient Descent
 
 In Word2Vec, Doc2Vec, and Node2Vec, Stochastic Gradient Descent (SGD) is the optimization method we used to tune the parameters of the model. SGD is a form of Gradient Descent that is defined by the following steps:
->1. Choose initial parameters, typically randomly selected from a probability distribution:
+
+> 1. Choose initial parameters, typically randomly selected from a probability distribution:
 $$\theta = \begin{bmatrix}
 			\theta_{0,0} & \theta_{0,1} & \dots & \theta_{0,s} \\
 			\theta_{1,0} & \theta_{1,1} & \dots & \theta_{1,s} \\
@@ -94,40 +112,68 @@ $$\theta = \begin{bmatrix}
 			\theta_{V,0} & \theta_{V,1} & \dots &\theta_{V,s} \\
 			         \end{bmatrix},\ \theta_{i,j}\ chosen from \  \Theta $$ 
          where $\Theta$ is some probability distribution, often $\mathcal{U}[0,1]$ or $\mathcal{N}(0,1)$. In the context of Word2Vec, $s$ is the embedding size of the word vectors, chosen beforehand, and $V$ is the number of unique words in the corpus.
->2. Calculate the gradient of the loss function over the entirety of the training data set. The parameters, $\theta$, become itself mines the calculated gradient with a learning rate.
->$$ \theta = \theta - \alpha \nabla_{\theta}L(\theta)$$
->3. Repeat step 2 until some convergence rule is achieved. This typically is a set number of iterations or when the gradient becomes sufficiently small.
+> 2. Calculate the gradient of the loss function over the entirety of the training data set. The parameters, $\theta$, become itself mines the calculated gradient with a learning rate.
+> $$ \theta = \theta - \alpha \nabla_{\theta}L(\theta)$$
+> 3. Repeat step 2 until some convergence rule is achieved. This typically is a set number of iterations or when the gradient becomes sufficiently small.
 
 Stochastic Gradient Descent is almost exactly Gradient Descent, with a small change for mostly computational purposes. It is very expensive to calculate $\nabla_{\theta}L(\theta)$, so instead we use Stochastic Gradient Descent. The difference is that step 2 is not done for every example in the training set. Instead, a subset of examples are randomly chosen from the training set when calculating the gradient of the loss function. SGD will often converge to a global minimum, and almost always converge to a local minimum, depending on the conditions {SOURCE}. SGD also usually requires more iterations than Gradient Descent for convergence, due to its use of a subset of examples.
 
 Lastly, $\alpha$ can be set to a range of values or to decrease linearly between two values. This is effectively allowing large changes in the parameters toward the beginning of the iterations, and decreasing the change of parameters as training continues. Due to the likelihood that the parameters must change a great deal to obtain the global minimum, this approach makes sense and works in practice {SOURCE}.
+
 # 2&nbsp;&nbsp;&nbsp;&nbsp;Intro to Doc2Vec
 
-Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles. For this reason Doc2Vec was introduced by {SOURCE}. Doc2Vec generates embeddings for each document, $d_i \in \mathbb{R}^s$. What is considered a document is completely up to the researcher. In our case we consider each of the case opinions from SCOTUS to be a different document. Doc2Vec is almost identical to Word2Vec, with a few modifications. In fact, word embeddings are also generated as part of training a Doc2Vec model.
+Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles. For this reason Doc2Vec was introduced by {SOURCE}. Doc2Vec generates embeddings for each document, $d_i \in \mathbb{R}^s$. What is considered a document is completely up to the researcher. One convenient aspect of Doc2Vec is that the documents can be of variable legnth. In our case we consider each of the case opinions from SCOTUS to be a different document. Doc2Vec is almost identical to Word2Vec, with a few modifications. In fact, word embeddings are also generated as part of training a Doc2Vec model.
 
 ## 2.1&nbsp;&nbsp;&nbsp;&nbsp;Paragraph Vector - Distributed Bag of Words (PV-DBOW)
 
-PV-DBOW is most similar to the Word2Vec Skip-Gram model. 
+PV-DBOW is most similar to the Word2Vec Skip-Gram model. The vectors that correspond to a given document here are learned by a process of predicting the words in $d_i$. The input-ouput pairs are generated as follows:
+
+$$ \big\{\big(d_i,\ (w_{d_{i,j}},\dots,w_{d_{i,j+c}})\big)\ \big|\ 0\leq i\leq s,\ 0\leq j \leq W_{d_i}-c\big\} $$
+
+where $s$ is the number of documents, $W_{d_i}$ is the length of the sequence of words corresponding to document $d_i$, $w_{d_{i,j}}$ is the $j^{th}$ word in the sequence of words corresponding to document $d_i$, and $c$ is the size of the context or window. To further illustrate this let us extend the *Anna Karenina* example we have begun. Consider the corpus to be the first line in *Anna Karenina* by Leo Tolstoy and the last line in *The Great Gatsby* by F. Scott Fitzgerald:
+
+$$ (So\ we\ beat\ on,\ boats\ against\ the\ current,\ borne\ back\ ceaselessly\ into\ the\ past, $$
+$$ Happy\ families\ are\ all\ alike;\ every\ unhappy\ family\ is\ unhappy\ in\ its\ own\ way) $$
+
+Then, giving the ids $0$, and $1$, respectively, a few of the input-output pairs, with $c = 2$ would be:
+
+$$ (0,\ boats\ against),\ (0,\ ceaselessly\ into), $$
+$$ (1,\ Happy\ families),\ (1,\ unhappy\ family) $$
+
+Note that the ids and words would be replaced with one-hot encoded vectors in the actual algorithm.
+
+The PV-DBOW method, according the original paper, only needs to "store the softmax weights as opposed to both softmax weights and word vectors" as in the model we will discuss next, PV-DM, resulting in PV-DBOW to utilize less memory in training {SOURCE}. The final output of the model is a vector corresponding to each document in the corpus. Ideally, documents that contain similar sequences of words will be mapped near each other in the resulting vector space. In these algorithms, cosine similarity is used as the measure of how "similar" two vectors are. Henceforth, cosine similarity will be what we mean when we talk about two vectors being similar.
+
+Because this is an unsupervised algorithm, one must do further analysis to identify how well the algorithm has worked on the corpus in question. Generally, PV-DBOW works better in practice, so this is the algorithm we chose to run on the SCOTUS corpus {SOURCE: https://arxiv.org/pdf/1607.05368.pdf}.
 
 ## 2.2&nbsp;&nbsp;&nbsp;&nbsp;Paragraph Vector - Distributed Memory (DM)
 
-PV-DM is most similar to the Word2Vec CBOW model. Recall that in CBOW the word vectors are learned by the process of predicting 
+PV-DM is most similar to the Word2Vec CBOW model. Recall that in CBOW the word vectors are learned by the process of predicting a specific word given a context. The extension to making this a document-embedding algorithm is quite straightforward. All one must do is include the document id to the input as if it were an additional context word. Thus, the input-output pairs are generated as follows:
+
+$$ \big\{\big((d_i,\ w_{i,o-\frac{c}{2}},\dots,w_{i,o+\frac{c}{2}}),\ w_o\big)\ \big|\ \frac{c}{2}\leq o\leq W_{d_i}-\frac{c}{2},\ c \neq 0\big\} $$
+
+In the context of our *Anna Karenina* and *The Great Gatsby* example, this would result in a few of the input-output pairs as follows:
+
+$$ \big((0,\ borne,\ ceaselessly),\ back\big),\ \big((0,\ on,\ against),\ boats\big), $$
+$$ \big((1,\ Happy,\ are),\ families\big),\ \big((1,\ every,\ family),\ unhappy\big) $$
+with $c = 2$ and the words and ids corresponding to one-hot encoded vectors, of course.
+
+Though the extension to Doc2Vec is straightforward, it turns out to be a very powerful algorithm as evidenced by {SOURCE}. This algorithm also results in word embeddings due to the words being used as inputs along with the document id. This does cause the PV-DM algorithm to be more memory-intensive than its counterpart, but allows one to avoid also training a Word2Vec model separately, if both are intended to be used. Because we opted to use PV-DBOW on the SCOTUS corpus, we ran Doc2Vec and Word2Vec separately.
 
 # 3&nbsp;&nbsp;&nbsp;&nbsp;Intro to Node2Vec
 
-blah blah blah
+Another extension of Word2Vec is Node2Vec, an embedding algorithm for graph or network data sets. Whereas Word2Vec and Doc2Vec are algorithms that were inspired by creating embeddings given sequences of words, the actual algorithm is agnostic to the word itself. The only importance a word provides to the algorithm is the vector to which it is associated. Thus, the Word2Vec and Doc2Vec models could just as easily use sequencesfof numbers, letters, or any combination of the two to output embeddings. Node2Vec leverages this by generating a sequence of node ids which will later be used in the Word2Vec algorithm in order to generate embeddings for the nodes in a graph. The key insight of this alogrithm is the method by which these sequences of node ids are generated. At the end of the algorithm, similar nodes should be near each other.
 
 ## 3.1&nbsp;&nbsp;&nbsp;&nbsp;Graph Object
 
-blah blah blah
+USE PAPER FROM LAST SEMESTER TO WRITE THIS SECTION!!!!
 
 ## 3.2&nbsp;&nbsp;&nbsp;&nbsp;Random Walk
 
 blah blah blah
 
-# SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwNzQ1OTY5MSwtMTI1OTYxMTg2LDU2Nj
-U1MTYwMCwxMjM0MDU2NzYwLDE1NDg1NTEyMDIsLTE5NDI1NjUw
-OTQsLTkwNTQ3NzUyMSwxMjA4MjUxOTc4LDM4MTI1NDgwOF19
--->
+*SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?*
+
+# Further Work
+
+While work has been done on Doc2Vec regarding finding the optimal parameters given a certain setting, no work has been done of this type for Node2Vec. Thus, my next task was to begin looking at the change in how well the algorithm performed as a specific parameter varied. -------->
