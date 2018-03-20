@@ -166,13 +166,85 @@ Another extension of Word2Vec is Node2Vec, an embedding algorithm for graph or n
 
 ## 3.1&nbsp;&nbsp;&nbsp;&nbsp;Graph Object
 
-USE PAPER FROM LAST SEMESTER TO WRITE THIS SECTION!!!!
+A graph or network, $G$, is defined as an ordered pair of its nodes, $V$, and edges which connect the nodes, $E$, so that $G = (V, E)$. We only consider undirected graphs in this paper. To make this and the following ideas concrete, let us consider a simple graph of cities, where an undirected edge exists if one can drive from one city to the other one a single highway.
+$$ V = (Charlotte,\ Atlanta,\ Nashville,\ Birmingham) $$
+$$ E = \big((Charlotte,\ Atlanta),\ (Atlanta,\ Birmingham),\ (Nashville,\ Birmingham) \big) $$
+
+The adjacency matrix, $A \in \mathbb{R}^{|V| \times |V|}$, is used to mathematically represent this graph structure. The entry, $A_{i,j}$, is $1$ if there exists an edge between node $i$ and $j$; otherwise, the entry is $0$. Note that the adjacency matrix is symmetric about its diagonal entries. The adjacency matrix for our example looks like:
+
+$$ A = \begin{bmatrix}
+			 0 & 1 & 0 & 0 \\
+			 1 & 0 & 0 & 1 \\
+			 0 & 0 & 0 & 1 \\
+			 0 & 1 & 1 & 0 \\
+			 \end{bmatrix} $$
+
+The *homophily* hypothesis states that nodes that are connected are similar and therefore should me near each other after embeddings are generated {SOURCE}. In our small example, this means that after running an embedding algorithm we would hope to find that: 1) Charlotte is similar to Atlanta, but not to Birmingham and Nashville, 2) Atlanta is similar to Charlotte and Birmingham, but not to Nashville, 3) Nashville is similar to Birmingham, but not to Atlanta and Charlotte, and 4) Birmingham is similar to Atlanta and Nashville, but not to Charlotte.
+
+In contrast to *homophily* is *structural equivalence*. The hypothesis of *structural equivalence* is that similar nodes play similar roles in the network. In context, of our example, it would mean we would hope to see Atlanta and Birmingham similar to each other, because they are both the link connecting two different cities. Additionally, Charlotte and Nashville should be similar, because they are both connected only to the linking nodes, and no others.
+
+There are trade-offs that one must make when choosing between these two sampling approaches. Breadth-First approaches consider all nodes immediately connected to the current node when choosing which node to visit next. Depth-First approaches consider nodes in increasing distance from the sources when choosing the next node. Breadth-First approaches favor the homophily hypothesis, whereas Depth-First approaches favor the structural equivalence hypothesis. That is, when generating a sequence of nodes, if one believed the homophily hypothesis to better encapsulate the relationships between the graph's nodes, one would employ the BFS approach to generate a random sequence. This would result in nodes that are connected often being immediately next or near each other in the sequence. In our example, a few random walks favoring this approach may look as follows:
+
+$$ (Charlotte,\ Atlanta,\ Charlotte,\ Atlanta,\ Birmingham) $$
+$$ (Atlanta,\ Birmingham,\ Atlanta,\ Birmingham,\ Nashville) $$
+
+On the other hand, if one believed that the relationship between nodes more closely resembled the structural equivalence hypothesis, it would be better to favor the DFS approach, in which the structure of the graph is more easily apparent in the sequence. A few random walks favoring this approach may look as follows:
+
+$$ (Charlotte, Atlanta, Birmingham, Nashville, Birmingham) $$
+$$ (Nashville, Birmingham, Atlanta, Charlotte, Atlanta) $$
+
+The reason that algorithms using graph structures must choose between these approaches is that there is no natural ordering of the data like in text data, where every sentence can be taken as a sequence, or time-series data, where the progression of time provides natural, sequential ordering to the data. Additionally, there is generally no *start* or *end* to the graphs like in the given examples of other data types.
+
+Most often in real-world applications, however, some nodes are better described by homophily and others structural equivalence. An exclusively BFS or DFS approach will not accomodate the differences between nodes. The *Random Walk* from the Node2Vec algorithm addresses this issue.
 
 ## 3.2&nbsp;&nbsp;&nbsp;&nbsp;Random Walk
 
-blah blah blah
+The random walk in this algorithm is, as was previously stated, the key contribution of this paper. It is the method by which a sequence of nodes is generated. This algorithm creates a single walk by starting a given node, $V_i$, and using a probability distribution over the previously visited node, the current node, and the immediate neighbors of the current node, chooses a "next" node in the sequence, to be repeated until the walk is of the desired length. A node is considered a neighbor of another node if they are connected by an edge. This is repeated a specific number of times for each node in the graph. Thus, the parameters specific to the random walk algorithm are as follows:
 
-*SHOULD MY PAPER BE FIRST, SECOND, OR THIRD PERSON?*
+> $p$ : Return parameter, a higher value (larger than $max(q,1)$) favors a BF approach, $p \in \mathbb{R}_{\geq 0}$
+
+> $q$ : In-out parameter, a higher value (larger than 1) favors a DF approach, $q \in \mathbb{R}_{\geq 0}$
+
+> $m$ : Number of random walks to generate per node, $m \in \mathbb{N}^+$
+
+> $l$ : Number of nodes sampled in each random walk, $m \in \mathbb{N}^+$
+
+One may notice that this will result in a matrix, $W \in V^{m\cdot|V|\ \times\ l}$, with the rows corresponding to random walks, each of length $l$. In our previous example, if we choose $m = 1$ and $l = 4$, we may obtain the following matrix:
+
+$$ W = \begin{bmatrix}
+			 Charlotte & Atlanta & Birmingham & Nashville  \\
+			 Atlanta & Birmingham & Nashville & Birmingham  \\
+			 Birmingham & Atlanta & Charlotte & Atlanta  \\
+			 Nashville & Birmingham & Atlanta & Charlotte  \\
+			 \end{bmatrix} $$
+
+After the walks are generated, the examples are ready to be run with the Word2Vec algorithm in order to obtain node embeddings. However, let us first take a closer look at how the "next" node is chosen at each step in a given walk.
+
+The probability distribution used to model the next possible nodes is {SOURCE}:
+
+$$ p(c_i = x \big| c_{i-1} = v) = \begin{cases}
+    \pi_{v,x}, & \text{if}\ (v,\ x) \in E \\
+    0, & \text{otherwise}
+  \end{cases} $$
+
+where the constant, $Z$ is used to normalize the unnormalized probabilities, $\pi_{v,x}$, that guide the walk, so that they sum to $1$. Now, let $\pi_{v,x} = \alpha_{p,q}(t,x) \cdot A_{v,x}$, and these unnormailized probabilities are obtained as follows:
+
+$$ \alpha_{p,q}(t,x) = \begin{cases}
+    \frac{1}{p}, & \text{if}\ d_{t,x} = 0 \\
+    1, & \text{if}\ d_{t,x} = 1 \\
+    \frac{1}{q}, & \text{if}\ d_{t,x} = 2 \\
+  \end{cases} $$
+
+where $d_{t,x}$ is the shortest path between nodes $t$ and $x$ {SOURCE}. This value, $d_{t,x}$, will be exactly $0$ for only the node $t$, exaclty $1$ if $x$ is a neighbor of $t$, and exactly $2$ if $x$ is a neighbor of $v$ and not $x$. Thus, it is clear why $p$ is considered the return parameter, as it dictates the probability with which a node will return to node the walk has just visited. Likewise, $q$ is considered the in-out parameter because it dictates the probability with which the walk will move further from previously visited nodes, thereby getting "out" of the current node neighborhood, into new parts of the graph.
+
+In practice, it is much too expensive to calculate these probability distributions while generating the random walks, so they are calculated prior to generating walks for each possible scenario. This is more memory-intensive, but drastically decreases the amount of time required to generate the random walks, because often the same task is repeated multiple times, given that each node begins a random walk $m$ number of times.
+
+Less work has been done with Node2Vec than Word2Vec or Doc2Vec, though it is a promising node embedding algorithm and has many practical applications ranging from Law, to Social Networks, to Medicine, and more. Some of the work that has been done with Word2Vec is how to go about choosing the hyperparameters of the algorithm {SOURCE}. This has yet to be done with Node2Vec and the following portion of my paper begins to deal with this.
+
+# 4&nbsp;&nbsp;&nbsp;&nbsp;Stochastic Block Model
+
+While it is tricky to identify how a specific algorithm performs as a specific parameter varies on a real, messy data set, one may perform such a task on a synthetic data set where the ground truth is known. For example, identifying how well Node2Vec performs on the SCOTUS citation network is not helpful because not only are we not aware of the upper bound of the results of the algorithm, but there is also variability in the existence of edges that may or may not be due to the node itself, we cannot know. Thus, we use the Stochastic Block Model (SBM) to run simulations looking at how well the algorithm is able to perform under certain parameter settings.
+
 
 # Further Work
 
