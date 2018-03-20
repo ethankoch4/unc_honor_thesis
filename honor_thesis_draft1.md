@@ -82,9 +82,12 @@ The Continuous Bag-of-Words model (CBOW) can be thought of as the reverse of the
 
 $$ \big\{\big((w_{o-\frac{c}{2}},\dots,w_{o+\frac{c}{2}}),\ w_o\big)\ \big|\ \frac{c}{2}\leq o\leq W-\frac{c}{2},\  c \neq 0\big\} $$
 
-# ADD ANNA KARENINA EXAMPLE TO THIS SECTION!!
+In the context of our *Anna Karenina* example, with $c = 2$, this corresponds to a few input-output pairs being:
 
-One may notice in the Skip-Gram model the input-output pairs are both of the same dimension. This is not true of the CBOW model. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\to \mathbb{R}^V$ to be an element-wise averaging function (one can also define it as a concatenating function) so that on a word-level the goal becomes to maximizes:
+$$ \big((Happy,\ are),\ families\big),\ \big((all,\ every),\ alike\big),$$
+$$ \big((every,\ family),\ unhappy\big),\ \big((its,\ way),\ own\big) $$
+
+One may notice that the input-output pairs are not of the same dimension in CBOW, though the algebra in training will require this to be true. So, we define a function $g:\ \mathbb{R}^{2c-1\times V}\to \mathbb{R}^V$ to be an element-wise averaging function (one can also define it as a concatenating function) so that on a word-level the goal becomes to maximizes:
 
 $$ p(w_o\big|w_{o-j},\dots,w_{o+j}; \theta) = \frac{e^{\big(g(w_{o-j}^T\theta,\ \dots\ ,\ w_{o+j}^T\theta)\big)}}{ \displaystyle\sum_{i=0}^V e^{\big(w_i^T\theta\big)}} $$
 
@@ -245,7 +248,12 @@ Less work has been done with Node2Vec than Word2Vec or Doc2Vec, though it is a p
 
 While it is tricky to identify how a specific algorithm performs as a specific parameter varies on a real, messy data set, one may perform such a task on a synthetic data set where the ground truth is known. For example, identifying how well Node2Vec performs on the SCOTUS citation network is not helpful because not only are we not aware of the upper bound of the results of the algorithm, but there is also variability in the existence of edges that may or may not be due to the node itself, we cannot know. Thus, we use the Stochastic Block Model (SBM) to run simulations looking at how well the algorithm is able to perform under certain parameter settings.
 
+The SBM is a random graph that is created by defining a probability matrix, $B \in \mathbb{R}^{|C| \times |C|}$, where $|C|$ is the number of communities decided beforehand and the entry, $B_{i,j}$ is the probability that an edge will exist for two given nodes, one in community $i$ and community $j$. In the simplest setting, one defines the probability of connecting to nodes within the same community and the probability of connecting to nodes outside of a node's community. All information is known about a graph generated from an SBM because one need only define the number of nodes in each community, and then for every node in a given community the edges will be created according to the specified probability matrix. Note that neither the rows, nor the columns, in the probability matrix are required to sum to $1$, as is required in a probability distribution.
 
+Due to the existence of a few parameters in the SBM itself, I chose to hold a few constant (e.g. number of nodes in each community, probability of connecting to a node within of one's community), and vary the parameter corresponding to the probability of connecting to a node outside of a given node's community while also varying a Node2Vec parameter. This is quite computationally expensive due to the number of simulations required, so while some progress has been made, it is not a complete picture, because that would potentially take years to run on current computer systems.
+
+
+# Computational 
 # Further Work
 
 While work has been done on Doc2Vec regarding finding the optimal parameters given a certain setting, no work has been done of this type for Node2Vec. Thus, my next task was to begin looking at the change in how well the algorithm performed as a specific parameter varied. -------->
