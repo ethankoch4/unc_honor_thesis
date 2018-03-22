@@ -9,19 +9,19 @@ def main():
     p = float(sys.argv[1])
     q = float(sys.argv[2])
 
-    n2v_model = node2vec(model=models.Word2Vec.load("../data/scotus_n2v_{0}_{1}.node2vec".format(p,q)),label_docs=False)
+    n2v_model = node2vec(model=models.Word2Vec.load("../data/scotus_n2v_{0}_{0}_mini.node2vec".format(p,q)),label_docs=False)
     n2v_model.p = p
     n2v_model.q = q
     G, issue_areas = load_scotus_network(file_path="../data/scotus_network.graphml")
 
     IA = 15
     
-    nodes = np.random.permutation([n for n in G.nodes])
+    nodes = np.random.permutation([n for n in G.nodes()])
 
     ia_to_name = {i : [] for i in range(IA)}
     name_to_ia = {}
-    for n in nodes:
-        ia = int(float(G.nodes[n]['issueArea']))
+    for n,d in G.nodes_iter(data=True):
+        ia = int(float(d['issueArea']))
         ia_to_name[ia].append(n)
         name_to_ia[n] = ia
 
