@@ -11,7 +11,7 @@ def main():
     q = float(sys.argv[2])
     print('n_clusters equals: {0}'.format(sys.argv[3]))
 
-    n2v_model = node2vec(model=models.Word2Vec.load("../data/scotus_n2v_{0}_{0}_mini.node2vec".format(p,q)),label_docs=False)
+    n2v_model = node2vec(model=models.Word2Vec.load("../data/scotus_n2v_{0}_{0}_mini.node2vec".format(p,q)))
     n2v_model.p = p
     n2v_model.q = q
     G, issue_areas = load_scotus_network(file_path="../data/scotus_network.graphml")

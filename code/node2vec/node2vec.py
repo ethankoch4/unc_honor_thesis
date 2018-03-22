@@ -106,7 +106,6 @@ class node2vec(object):
 
             agglomerative = AgglomerativeClustering(n_clusters=n_clusters,
                                                     affinity='cosine',
-                                                    connectivity=self.Adj_M,
                                                     linkage='average'
                                                     ).fit(walks)
             return agglomerative
