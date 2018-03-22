@@ -15,10 +15,10 @@ do
     COMMAND="python3 cluster_non_ia_node2vec.py 1.0 1.0 "
     COMMAND+="$var"
     echo "$COMMAND"
-    OUT_NAME="non_ia_d2v_"
+    OUT_NAME="non_ia_n2v_"
     OUT_NAME+="$var"
     OUT_NAME+=".log"
-    JOB_NAME="non_ia_d2v"
+    JOB_NAME="non_ia_n2v"
     JOB_NAME+="$var"
     sbatch -o "$OUT_NAME" -t 2-12 --job-name="$JOB_NAME" --mem=32768 --wrap="$COMMAND"
     var=$(($var-$step))
