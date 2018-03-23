@@ -285,3 +285,50 @@ where $d_{t,x}$ is the shortest path between nodes $t$ and $x$ {SOURCE}.
 # Further Work
 
 *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* While work has been done on Doc2Vec regarding finding the optimal parameters given a certain setting, no work has been done of this type for Node2Vec. Thus, my next task was to begin looking at the change in how well the algorithm performed as a specific parameter varied. -------->
+
+# 5&nbsp;&nbsp;&nbsp;&nbsp;On Real World Data
+
+## 5.1&nbsp;&nbsp;&nbsp;&nbsp;Word2Vec on SCOTUS vs. GoogleNews vectors
+
+***NEED TO DO***
+
+## 5.2&nbsp;&nbsp;&nbsp;&nbsp;Doc2Vec Similarity Plots
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* After running the Doc2Vec algorithm on the SCOTUS corpus, I became curious about how similarity is affected by time. So, for each document I calculated its similarity to every other document and plotted the similarity over time. In the following plot the blue line corresponds to the date of the document held constant, each green dot corresponds to the similarity score between the document held constant and some other document in the corpus, and the red line is the median similarity score at each year.
+
+![](2645639_similarity_plot.png)
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* As seen in the above plot, every case after about 2006 displays a marked jump in similarity scores between pre-2006 cases and post-2006. The reason for this is not yet clear and further investigation must be done to identify the cause of this jump, but one initial thought is that certain procedural precedents may have changed that are referred to in every post-2006 case. However, even this is not likely, since this has certainly happened in the court's past and jumps like this are not seen in previous cases. As an example, the plot for this case from 1892 is much more stable over time:
+
+![](2539855_similarity_plot.png)
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Thus, while this jump seems to contain interesting differences and may merit further analysis, it will require the recruitment of legal experts and further investigation of the cases themselves instead of the algorithms performed on them, which is outside of the scope of this paper. Let's move on to comparing the Doc2Vec and Node2Vec algorithms run on the SCOTUS corpus.
+
+## 5.3&nbsp;&nbsp;&nbsp;&nbsp;Doc2Vec vs. Node2Vec on SCOTUS: Varying Cluster Sizes
+
+![](hierarchical_d2v_n2v_first.png)
+
+![](kmeans_d2v_n2v_first.png)
+
+![](n2v_clusters_first.png)
+![](d2v_clusters_first.png)
+
+## 5.4&nbsp;&nbsp;&nbsp;&nbsp;Doc2Vec vs. Node2Vec on SCOTUS vs. IssueAreas
+
+***NEED TO DO***
+
+### 5.4.1&nbsp;&nbsp;&nbsp;&nbsp;Combine the two - Did it perform better?
+
+***NEED TO DO***
+
+## 5.5&nbsp;&nbsp;&nbsp;&nbsp;Phase Transition on SBM
+
+![](emp_thresh_vs_wl.png)
+
+![](redo_q_0.8_walk_len_50.png)
+
+
+
+# 5.5&nbsp;&nbsp;&nbsp;&nbsp;Conclusion
+
+***NEED TO DO***
