@@ -1,16 +1,18 @@
 ---
-output:
-  pdf_document
-#  geometry: "left=1in,right=1in,top=1in,bottom=1in"
 header-includes:
-  - \usepackage{setspace}\doublespacing
+- \usepackage{setspace}\doublespacing
+output:
+  pdf_document: default
+  word_document: default
+  html_document:
+    df_print: paged
 ---
 
 # Abstract
 
-*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Word2Vec
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Word2Vec[^1]
 
-*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Doc2Vec
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Doc2Vec[^2]
 
 *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Node2Vec
 
@@ -32,7 +34,7 @@ header-includes:
 
 *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* The goal of the Word2Vec algorithm is to generate a vector for every word in a corpus that retains the meaning of that word in relation to every other word. The reason the meaning of a given word is only retained in relation to other words is that any given direction in a word's embedding, $w_iv_j \in \mathbb{R}^ks$, the direction $k_js_k$ itself is most likely uninterpretable in and of itself. [{HELP}: https://stackoverflow.com/questions/38423387/why-does-word2vec-use-cosine-similarity]
 
-*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Word2Vec is an embedding algorithm with the goal of generating a vector that corresponds to a given word. This algorithm is not only the basis for many other similar embedding algorithms, but also has applications sentiment analysis, topic detection, and other NLP-related tasks. The goal of running Word2Vec on the SCOTUS corpus is to generate embeddings for the words used in Supreme Court cases for comparison with the same words used in non-legal contexts, in this case the GoogleNews embeddings {HELP}{SOURCE}.
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Word2Vec is an embedding algorithm with the goal of generating a vector that corresponds to a given word \cite{le2014distributed}. This algorithm is not only the basis for many other similar embedding algorithms, but also has applications sentiment analysis, topic detection, and other NLP-related tasks. The goal of running Word2Vec on the SCOTUS corpus is to generate embeddings for the words used in Supreme Court cases for comparison with the same words used in non-legal contexts, in this case the GoogleNews embeddings {HELP}{SOURCE}.
 
 ### 1.1.2&nbsp;&nbsp;&nbsp;&nbsp;Skip-gram Architecture
 
@@ -144,7 +146,7 @@ where $\Theta$ is some probability distribution, often $\mathcal{U}[0,1]$ or $\m
 
 # 2&nbsp;&nbsp;&nbsp;&nbsp;Intro to Doc2Vec
 
-*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles. For this reason Doc2Vec was introduced by {SOURCE}. Doc2Vec generates embeddings for each document, $d_i \in \mathbb{R}^s$. What is considered a document is completely up to the researcher. One convenient aspect of Doc2Vec is that the documents can be of variable legnth. In our case we consider each of the case opinions from SCOTUS to be a different document. Doc2Vec is almost identical to Word2Vec, with a few modifications. In fact, word embeddings are also generated as part of training a Doc2Vec model.
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Word2Vec generates embeddings at a word-level. However, this is not useful if one wishes to compare, say, the abstracts of different academic articles. For this reason Doc2Vec was introduced by Mikolov et al \cite{mikolov2013distributed}. Doc2Vec generates embeddings for each document, $d_i \in \mathbb{R}^s$. What is considered a document is completely up to the researcher. One convenient aspect of Doc2Vec is that the documents can be of variable legnth. In our case we consider each of the case opinions from SCOTUS to be a different document. Doc2Vec is almost identical to Word2Vec, with a few modifications. In fact, word embeddings are also generated as part of training a Doc2Vec model.
 
 ## 2.1&nbsp;&nbsp;&nbsp;&nbsp;Paragraph Vector - Distributed Bag of Words (PV-DBOW)
 
@@ -278,13 +280,13 @@ where $d_{t,x}$ is the shortest path between nodes $t$ and $x$ {SOURCE}.
 
 # Intro to SCOTUS Corpus
 
-*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* The Supreme Court of the United States releases an opinion for every case that they hear. Our data set from CourtListener has 27,885 of these {SOURCE}.   Thus, viewing the SCOTUS corpus as a graph, this data set has 27,885 nodes (corresponding to each case) and 234,209 edges, where an edge exists if one case cites another. In my case I consider the graph as being undirected. My hope is that this will remove the time series aspect of the data that is difficult to account for. Additionally, this simplifies the implementation of previously discussed algorithms. This citation graph is precisely the data set on which I ran Node2Vec to generate embeddings for each case.
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* The Supreme Court of the United States releases an opinion for every case that they hear. Our data set from CourtListener has $27,885$ of these {SOURCE}.   Thus, viewing the SCOTUS corpus as a graph, this data set has $27,885$ nodes (corresponding to each case) and $234,209$ edges, where an edge exists if one case cites another. In my case I consider the graph as being undirected. My hope is that this will remove the time series aspect of the data that is difficult to account for. Additionally, this simplifies the implementation of previously discussed algorithms. This citation graph is precisely the data set on which I ran Node2Vec to generate embeddings for each case.
 
 *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Each case (node) has text associated with it as well. I did not attempt to account for differences in author of the case, though I do not believe this would affect the embeddings greatly, since the cases are generally quite thorough and discuss the topic of the case at length, as opposed to using colloquial language more specific to a single judge. I did no further preprocessing, though I do believe very slight improvements may be made using methods such as tokenization due to language variations over time. In fact, attempting to account for language variations over time would be an interesting extension. However, it is outside the scope of this project. It is on these text documents that I ran Doc2Vec to generate embeddings for each case.
 
 # Further Work
 
-*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* While work has been done on Doc2Vec regarding finding the optimal parameters given a certain setting, no work has been done of this type for Node2Vec. Thus, my next task was to begin looking at the change in how well the algorithm performed as a specific parameter varied. -------->
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* While work has been done on Doc2Vec regarding finding the optimal parameters given a certain setting, no work has been done of this type for Node2Vec. Thus, my next task was to begin looking at the change in how well the algorithm performed as a specific parameter varied.
 
 # 5&nbsp;&nbsp;&nbsp;&nbsp;On Real World Data
 
@@ -296,39 +298,90 @@ where $d_{t,x}$ is the shortest path between nodes $t$ and $x$ {SOURCE}.
 
 *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* After running the Doc2Vec algorithm on the SCOTUS corpus, I became curious about how similarity is affected by time. So, for each document I calculated its similarity to every other document and plotted the similarity over time. In the following plot the blue line corresponds to the date of the document held constant, each green dot corresponds to the similarity score between the document held constant and some other document in the corpus, and the red line is the median similarity score at each year.
 
-![](2645639_similarity_plot.png)
+\hfill\includegraphics[width=400pt]{2645639_similarity_plot.png}\hspace*{\fill}
 
-*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* As seen in the above plot, every case after about 2006 displays a marked jump in similarity scores between pre-2006 cases and post-2006. The reason for this is not yet clear and further investigation must be done to identify the cause of this jump, but one initial thought is that certain procedural precedents may have changed that are referred to in every post-2006 case. However, even this is not likely, since this has certainly happened in the court's past and jumps like this are not seen in previous cases. As an example, the plot for this case from 1892 is much more stable over time:
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* As seen in the above plot, every case after about $2006$ displays a marked jump in similarity scores between pre-$2006$ cases and post-$2006$. The reason for this is not yet clear and further investigation must be done to identify the cause of this jump, but one initial thought is that certain procedural precedents may have changed that are referred to in every post-$2006$ case. However, even this is not likely, since this has certainly happened in the court's past and jumps like this are not seen in previous cases. As an example, the plot for this case from $1892$ is much more stable over time:
 
-![](2539855_similarity_plot.png)
+\hfill\includegraphics[width=400pt]{2539855_similarity_plot.png}\hspace*{\fill}
 
 *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Thus, while this jump seems to contain interesting differences and may merit further analysis, it will require the recruitment of legal experts and further investigation of the cases themselves instead of the algorithms performed on them, which is outside of the scope of this paper. Let's move on to comparing the Doc2Vec and Node2Vec algorithms run on the SCOTUS corpus.
 
 ## 5.3&nbsp;&nbsp;&nbsp;&nbsp;Doc2Vec vs. Node2Vec on SCOTUS: Varying Cluster Sizes
 
-![](hierarchical_d2v_n2v_first.png)
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* The goal in running clustering algorithms on both the Node2Vec and Doc2Vec embeddings is explore the difference in what information is stored in each. Because labels do not exist for every single number of clusters setting, I examined four different plots to obtain an idea of the differences and similairities between the embeddings. For each plot, four different widely-used clustering metrics are shown alongside the mean of those four metrics. The metrics are: V-Measure, Homogeneity, Normalized Mutual Information, and Completeness. One may notice that each of these require labels from clustering and true labels of the nodes. For computational reasons I was unable to run a metric that did not require true labels. However, this would be a next step in the investigation of Doc2Vec and Node2Vec on SCOTUS. So, instead of providing true labels I provided either labels from a different clustering method or from a different embedding method. The scores in the first graph were obtained by scoring the labels obtained from the hierarchical clustering method from each of Node2Vec and Doc2Vec:
 
-![](kmeans_d2v_n2v_first.png)
+\hfill\includegraphics[width=350pt]{hierarchical_d2v_n2v_first.png}\hspace*{\fill}
 
-![](n2v_clusters_first.png)
-![](d2v_clusters_first.png)
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* The above plot essentially shows the extent to which the hierarchical clustering labels from Node2Vec and those from Doc2Vec agree with each other as the number of clusters increases. The approximately linear increase shows that Node2Vec's labels and Doc2Vec's labels agreed more as the number of clusters increases. Though further investigation is required to verify, I take this to mean that initial cluster splits represent very different ideas for Node2Vec and Doc2Vec, but they converge over time. I think this is intuitive, because if the number of labels is exactly $27,885$, the number of cases, then the scores will be perfect since each cluster has exactly one element (assuming each cluster would have at least one).
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* The second plot in this section was obtained in exactly the same way as the first, with hierarchical clustering replaced by KMeans clustering. That is, the plot shows scores obtained by comparing KMeans labels on Node2Vec to Kmeans labels on Doc2Vec as the number of clusters increases. The following plot further supports my hypothesis that initial splits at small numbers of clusters represent very different ideas which converge as the number of clusters increases. It also shows an upward linear trend, though it is a more sharp increase than its hierarchical clustering counterpart:
+
+\hfill\includegraphics[width=350pt]{kmeans_d2v_n2v_first.png}\hspace*{\fill}
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* The scores in the following two plots were obtained by comparing the labeling from KMeans and hierarchical clustering. The first plot shows the clustering labels with regard to Node2Vec only. The scores in the plot have a slight downward, linear trend. This means that the KMeans clustering labels on Node2Vec and the hierarchical clustering labels on Node2Vec disagreed slightly more as the nubmer of clusters increased. This means to me that almost all the information found by Node2Vec can be represented in a small number of clusters. However, I would expect this plot to increase again at some point if the number of clusters extended beyond $500$. The metrics mostly mirrored each others' behaviors, realtively speaking:
+
+\hfill\includegraphics[width=300pt]{n2v_clusters_first.png}\hspace*{\fill}
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* As was previously stated, the final plot in this section was obtained by comparing the KMeans clustering labels on Doc2Vec and the hierarchical clustering labels on Doc2Vec. This plot shows a trend that is similar to that of the positive portion of an inverse tangent curve. There is a sharp increase at first which levels off as the number of clusters increases. I hypothesize that this means Doc2Vec contains a great deal of nuanced information that require a larger number of clusters to display, relative to Node2Vec. Again, the metrics mostly mirrored each other:
+
+\hfill\includegraphics[width=350pt]{d2v_clusters_first.png}\hspace*{\fill}
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Speaking in non-technical terms, I believe these plots as a whole show that Node2Vec contains a few very important pieces of information about the cases which override the importance of others, while Doc2Vec contains many different pieces of information, all of which are similarly important in distinguishing the cases. I believe that this is what caused the first two plots to be linear upward. Further investigation would be required to confirm or deny this hypothesis. However, let's now take a look at these embeddings in a situation where labels do exist for each case. 
 
 ## 5.4&nbsp;&nbsp;&nbsp;&nbsp;Doc2Vec vs. Node2Vec on SCOTUS vs. IssueAreas
 
-***NEED TO DO***
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* A group of researchers at Washington University Law took it upon themselves to categorize each SCOTUS case into $14$ different "issue areas" including categories like Privacy, First Amendment, Due Process, and Economic Activity. This provides true labels for the SCOTUS cases against which we can compare our clustering labels. Let us look at how KMeans clustering on Node2Vec vs Doc2Vec performed:
 
-### 5.4.1&nbsp;&nbsp;&nbsp;&nbsp;Combine the two - Did it perform better?
+\hfill\includegraphics[width=350pt]{ia_kmeans_d2v_n2v_first.png}\hspace*{\fill}
 
-***NEED TO DO***
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* The above plot shows that, surprisingly, clustering on Node2Vec embeddings did a better job of identifying the issue area of a case than clustering on Doc2Vec. Doc2Vec has an advantage over Node2Vec in terms of mass of information in that each case contains a great deal of text describing in detail the proceedings and decision. However, Node2Vec only has the citation network. I believe that this strength of Doc2Vec was also its downfall in this setting. Because legal text uses a lot of the same terminology to describe how the case unfolded, Doc2Vec may not have been able to ignore the similarities and extract the differences well enough to reflect the issue areas in its clusters. There are, of course, many other variables in this, such as cleaning steps, the clustering method, etc. Thus, it is too early to identify the origin of this difference. However, this gives me reason to believe the citation network offers information about the cases that is difficult to extract from the text.
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* I also performed multinomial logistic classification on Node2Vec, Doc2Vec, and a concatenation of the embeddings as well, to get more of an idea of how well the embeddings provide information about the issue areas. For training I used an $85/15$ split for training/test sets, as well as $3$-Fold Cross-Validation to identify the parameters of the best performing model. The results are as follows:
+\newline
+
+```{r table2, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| Embedding Algorithm | Score on Test Set |
+|:--------------------|------------------:|
+| Doc2Vec             |             0.695 |
+| Node2Vec            |             0.581 |
+| Both Concatenated   |             0.686 |
+"
+cat(tabl)
+```
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Both embeddings offer significant improvement over the baseline, $0.071$, which is the score one would expect to obtain with random assignments. Interestingly, though, the logistic model on Doc2Vec performed better than that on Node2Vec. Additionally, using a concatenated version of the embeddings did not offer any improvement. Thus, the difference in performance of the clustering as previously seen was most likely due to KMeans representing information other than the $14$ issue areas in its 14 clusters. However, the logistic model was able to, for the most part, distinguish between the $14$ issue areas.
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* Lastly, that the contatenated version performed slightly worse than the logistic classification model on Doc2Vec embeddings is most likely due to Doc2Vec containing most of the information offered by Node2Vec. However, this is only marginally so. The embedding dimension of both Doc2Vec and Node2Vec is $300$. Now, only $154$ of the largest $300$ coefficients in the concatenated-embedding logistic classification model were from Doc2Vec. This may be because Doc2Vec's features are only slightly more predictive toward issue area classification or because only a portion of Doc2Vec's features are predictive toward issue area classification but they are strongly predictive. A next step in investigation would be to identify whether a better method of joining the two embedding spaces would provide different results, as concatenation is quite simple and does not take certain factors, such as potential multicollinearity, into account.
 
 ## 5.5&nbsp;&nbsp;&nbsp;&nbsp;Phase Transition on SBM
 
-![](emp_thresh_vs_wl.png)
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* An ever-present question when running the Node2Vec and Doc2Vec algorithms is: what parameters are good enough? Some research has been done on this with regard to Doc2Vec and Word2Vec, but not on Node2Vec {SOURCE}. In order to answer this question we must begin with a data set wherein the ground truth is known. This is not the case for SCOTUS, so instead I use the Stochastic Block Model (SBM). All labels of nodes in this are set before the edges are generated, so we can score our cluster labels against the true labels in every case.
 
-![](redo_q_0.8_walk_len_50.png)
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* The change two parameters dictating the existence of edges, in-class connection probability and out-of-class connection probability, offer some insight into how well Node2Vec may perform on a given network. Thus, I hold in-class probability fixed at $0.8$ and increase the out-of-class probability from $0.0$ to $0.79$ with a step size of $0.01$. The following plot shows the change in performance of the Node2Vec algorithm on $20$ different sampled SBM's at every point, as the out-of-class probability increases:
 
+\hfill\includegraphics[width=350pt]{redo_q_0.8_walk_len_50.png}\hspace*{\fill}
 
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* There exist certain theoretic thresholds beyond which the class labels in the $2$-community setting should not be recoverable or detectable. I also include an empirical threshold, beyond which the thresholds of empirical success have not been obtained. The exact location of the empirical threshold in any given setting is only somewhat of interest. The question of interest is really how the location of the threshold changes as one of the Node2Vec parameters changes. So, the simulations that produced the above plot were repeated for increasing walk lengths, in order to identify how the Node2Vec parameters change the ability of the researcher to recover the communities, using the empirical thresholds:
+
+\hfill\includegraphics[width=350pt]{emp_thresh_vs_wl.png}\hspace*{\fill}
+
+*&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* *&nbsp;* As is shown in the above plots, it seems to be the case that phase transitions exist in the parameter settings. There are specific parameter values on one side of which the algorithm can do no better than random guessing and at which performs rapidly goes to almost exact recovery. Actual data sets may not experience such sharp changes due to data quality issues, computational complexity issues, and the reality that even for a real data set with $2$-communities, the probability that a node connects to a node outside of its class may not be constant as it is in the SBM. However, the above plots are the beginning of an interesting insight into how the parameters of the Node2Vec model, and likely other embedding algorithms, change the ability to recover the true labels of nodes.
 
 # 5.5&nbsp;&nbsp;&nbsp;&nbsp;Conclusion
 
 ***NEED TO DO***
+
+
+\singlespace
+\setlength{\parindent}{-0.2in}
+\setlength{\leftskip}{0.2in}
+\setlength{\parskip}{8pt}
+\noindent
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+
+[^1]: Paper1
+[^2]: Paper1
