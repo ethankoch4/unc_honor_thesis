@@ -7,13 +7,13 @@ def main():
     from utilities import load_scotus_network
     from utilities import get_name_to_date
     from utilities import get_list_of_docs
-    p = float(sys.argv[1])
-    q = float(sys.argv[2])
+    p = sys.argv[1]
+    q = sys.argv[2]
     print('n_clusters equals: {0}'.format(sys.argv[3]))
 
-    n2v_model = node2vec(model=models.Word2Vec.load("../data/scotus_n2v_{0}_{0}_mini.node2vec".format(p,q)))
-    n2v_model.p = p
-    n2v_model.q = q
+    n2v_model = node2vec(model=models.Word2Vec.load("../data/scotus_n2v_{0}_{0}_tiny.node2vec".format(p,q)))
+    n2v_model.p = float(p)
+    n2v_model.q = float(q)
     G, issue_areas = load_scotus_network(file_path="../data/scotus_network.graphml")
 
     nodes = np.random.permutation([n for n in G.nodes()])

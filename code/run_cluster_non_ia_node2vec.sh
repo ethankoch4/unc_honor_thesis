@@ -12,7 +12,7 @@ echo "$3"
 while [ "$var" -gt "$finish" ]
 do
     echo "$var"
-    COMMAND="python3 cluster_non_ia_node2vec.py 1.0 1.0 "
+    COMMAND="python3 cluster_non_ia_node2vec.py 1.0 1 "
     COMMAND+="$var"
     echo "$COMMAND"
     OUT_NAME="non_ia_n2v_"
